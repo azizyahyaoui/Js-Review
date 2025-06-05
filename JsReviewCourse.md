@@ -431,7 +431,7 @@ fruits.forEach((fruit, index) => {
 
 #### Loop Control Statements
 
-#### **`break` Statement**
+##### **`break` Statement**
 
 The `break` statement terminates the current loop and resumes execution at the next statement after the loop.
 
@@ -446,7 +446,7 @@ for (let i = 0; i < 10; i++) {
 // Output: 0, 1, 2, 3, 4
 ```
 
-#### **`continue` Statement**
+##### **`continue` Statement**
 
 The `continue` statement skips the current iteration of the loop and proceeds to the next iteration.
 
@@ -545,6 +545,7 @@ scopeExample();
 ```
 
 #### Closures
+
 
 ```javascript
 function outerFunction(x) {
@@ -1344,7 +1345,7 @@ console.log("name" in dynamicObject); // Output: true
 console.log("address" in dynamicObject); // Output: false
 ```
 
-#### Using `hasOwnProperty()`
+#####  Using `hasOwnProperty()`
 
 ```javascript
 console.log(dynamicObject.hasOwnProperty("age")); // Output: true
@@ -1643,11 +1644,6 @@ The `Date` object in JavaScript is versatile and can be used for a wide range of
 
 ---
 
-
-
-
-
-
 ### - Document Object Model (DOM)
 
 > - DOM is a programming interface for web documents. It represents and manipulates the structure of a document.
@@ -1675,18 +1671,22 @@ You can access elements in the DOM using various methods:
   ```javascript
   const element = document.getElementById('myId');
   ```
+
 - **`getElementsByClassName`**: Selects all elements with a specific class name.
   ```javascript
   const elements = document.getElementsByClassName('myClass');
   ```
+
 - **`getElementsByTagName`**: Selects all elements with a specific tag name.
   ```javascript
   const elements = document.getElementsByTagName('div');
   ```
+
 - **`querySelector`**: Selects the first element that matches a CSS selector.
   ```javascript
   const element = document.querySelector('.myClass');
   ```
+
 - **`querySelectorAll`**: Selects all elements that match a CSS selector.
   ```javascript
   const elements = document.querySelectorAll('.myClass');
@@ -1697,6 +1697,7 @@ You can access elements in the DOM using various methods:
   ```javascript
   element.textContent = 'New text';
   ```
+
 - **`innerHTML`**: Sets or gets the HTML content of an element.
   ```javascript
   element.innerHTML = '<span>New HTML</span>';
@@ -1707,10 +1708,12 @@ You can access elements in the DOM using various methods:
   ```javascript
   element.setAttribute('src', 'image.png');
   ```
+
 - **`getAttribute`**: Gets the value of an attribute.
   ```javascript
   const src = element.getAttribute('src');
   ```
+
 - **`removeAttribute`**: Removes an attribute.
   ```javascript
   element.removeAttribute('src');
@@ -1728,10 +1731,12 @@ You can access elements in the DOM using various methods:
   ```javascript
   const newDiv = document.createElement('div');
   ```
+
 - **`appendChild`**: Adds a new child element to a parent element.
   ```javascript
   document.body.appendChild(newDiv);
   ```
+
 - **`insertBefore`**: Inserts a new element before an existing one.
   ```javascript
   document.body.insertBefore(newDiv, existingElement);
@@ -1776,10 +1781,6 @@ You can add event listeners to elements to respond to user interactions.
 </body>
 </html>
 ```
-
-
-Event Handling
-
 ---
 
 ### - HTML, CSS, and JavaScript Together
@@ -1897,8 +1898,6 @@ This regex pattern checks for a valid email format or either `@gmail.com` or `@h
 
 ----
 
-
-
 ## Advanced JavaScript 
 
 ### Function Declarations vs Expressions 
@@ -1917,7 +1916,7 @@ function functionName(parameters) {
 }
 ```
 
-#### Example
+##### Example
 
 ```javascript
 console.log(greet()); // Output: Hello, world!
@@ -1931,7 +1930,7 @@ In this example:
 - The `greet` function is declared using a function declaration.
 - The function can be called before its definition due to hoisting.
 
-#### Key Characteristics
+##### Key Characteristics
 
 1. **Hoisting**: Function declarations are hoisted, meaning they are available throughout their scope, even before the line of code where they are defined.
 
@@ -1943,7 +1942,7 @@ In this example:
 
 A function expression defines a function within an expression and is not hoisted. Function expressions can be named or anonymous. They are assigned to variables and can only be called after their definition.
 
-#### Syntax
+##### Syntax
 
 ```javascript
 const functionName = function(parameters) {
@@ -1951,7 +1950,7 @@ const functionName = function(parameters) {
 };
 ```
 
-#### Example
+##### Example
 
 ```javascript
 const greet = function() {
@@ -1965,7 +1964,7 @@ In this example:
 - The `greet` function is defined using a function expression and assigned to a variable.
 - The function can only be called after its definition.
 
-#### Key Characteristics
+##### Key Characteristics
 
 1. **No Hoisting**: Function expressions are not hoisted. The function can only be used after it has been defined.
 
@@ -1995,7 +1994,7 @@ In this example:
 
 #### Examples in Context
 
-#### Function Declaration Example
+##### Function Declaration Example
 
 ```javascript
 // Function declaration
@@ -2006,7 +2005,7 @@ function calculateArea(radius) {
 console.log(calculateArea(5)); // Output: 78.53981633974483
 ```
 
-#### Function Expression Example
+##### Function Expression Example
 
 ```javascript
 // Function expression
@@ -2736,7 +2735,7 @@ console.log(account.#balance); // SyntaxError: Private field '#balance' must be 
 JavaScript classes provide a clear and concise way to define and manage objects and their relationships. They support inheritance, encapsulation, and abstraction, making it easier to model complex systems. While they offer a familiar syntax similar to other object-oriented languages like Java and C++, it's important to remember that they are built on JavaScript's prototype-based inheritance model.
 
 
-### Try and Catch
+### Error handling: Try and Catch
 
 In JavaScript, `try...catch` is a block of code used for handling exceptions—errors that occur during the execution of a program. When an error occurs, the normal flow of the code is interrupted, and control is transferred to the `catch` block if present. This mechanism helps in gracefully handling errors, preventing the program from crashing, and providing meaningful error messages or alternative behavior.
 
@@ -3724,22 +3723,5 @@ Modules (import / export)
 
 ES6+ features like destructuring in function parameters, optional chaining ?., nullish coalescing ??
 
-Error handling: try, catch, finally
-
-⚠️ Lacks Visual Aids:
-
-For some concepts like prototype chain, closure, or event loop, a diagram or ASCII sketch would enhance understanding.
-
-⚠️ No Practice Exercises:
-
-There are no challenges, quizzes, or “try it yourself” tasks.
-
-Adding small exercises after sections would greatly improve engagement.
-
-⚠️ DOM Section is Basic:
-
-It lacks real-world interactivity or mini projects (e.g., counter app, form validation).
-
-Consider showing how to dynamically update UI based on events.
 
 It’s not yet advanced (e.g., no recursion, generators, async patterns, data structures, OOP patterns, or design patterns), but it's one of the better foundational reviews I’ve seen from a self-written course.
