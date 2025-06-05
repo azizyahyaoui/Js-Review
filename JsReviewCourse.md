@@ -100,7 +100,7 @@ let x = 10;
 x < 5 ? console.log('less than five') : console.log('not less');
 ```
 
-> There's other shortcut  to the If statement called guard and default operators :
+> There's other shortcut to the If statement called guard and default operators :
 
 ---
 
@@ -302,8 +302,6 @@ There are several ways to create arrays in JavaScript:
   ```
 
 Arrays are a fundamental part of JavaScript, offering a wide range of methods to manipulate, transform, and access data efficiently. Understanding and using these methods effectively is crucial for working with data in JavaScript.
-
-
 
 ### - Loops 
 
@@ -1897,9 +1895,6 @@ console.log(validateEmail("example@yahoo.com")); // false
 
 This regex pattern checks for a valid email format or either `@gmail.com` or `@hotmail.com` and ensures that the username part contains only valid characters.
 
-
-
-
 ----
 
 
@@ -2243,7 +2238,8 @@ In JavaScript, **closures** and **currying** are powerful functional programming
 
 ---
 
-### **1. Closures**  
+### **When to Use Closures and Currying ** 
+
 A **closure** is a function that retains access to variables from its outer (enclosing) scope, even after the outer function has finished executing.  
 
 #### **When to Use Closures**:  
@@ -2282,7 +2278,7 @@ double(5); // 10
 
 ---
 
-### **2. Currying**  
+
 **Currying** converts a function with multiple arguments into a sequence of unary (single-argument) functions.  
 
 #### **When to Use Currying**:  
@@ -2314,7 +2310,7 @@ shout("hello"); // "HELLO!"
 
 ---
 
-### **Key Differences**:  
+#### **Key Differences**:  
 | **Closure**                          | **Currying**                          |  
 |--------------------------------------|---------------------------------------|  
 | General technique to retain state.   | Specific transformation of functions. |  
@@ -2323,11 +2319,11 @@ shout("hello"); // "HELLO!"
 
 ---
 
-### **When NOT to Use**:  
+#### **When NOT to Use**:  
 - **Closures**: Avoid overusing for trivial tasks (can cause memory overhead).  
 - **Currying**: Don’t force it if direct multi-arg functions are clearer.  
 
-### **Real-World Applications**:  
+#### **Real-World Applications**:  
 - **Closures**: React hooks (e.g., `useState`), Redux middleware, event listeners.  
 - **Currying**: Configurable utility functions (e.g., validators), middleware chains.  
 
@@ -3745,14 +3741,5 @@ Adding small exercises after sections would greatly improve engagement.
 It lacks real-world interactivity or mini projects (e.g., counter app, form validation).
 
 Consider showing how to dynamically update UI based on events.
-
-🎯 Level Assessment
-This course is ideal for:
-
-Beginners to early-intermediate learners (especially self-taught)
-
-People who already know a bit of JS and want a clean review
-
-Those preparing for frontend development or trying to master core JS before frameworks
 
 It’s not yet advanced (e.g., no recursion, generators, async patterns, data structures, OOP patterns, or design patterns), but it's one of the better foundational reviews I’ve seen from a self-written course.
