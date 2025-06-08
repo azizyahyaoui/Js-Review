@@ -7,6 +7,8 @@
   - All related exercises and projects are organized in the same repository and divided into levels.
 
   ---
+
+  [freecodecamp async-await ](https://www.freecodecamp.org/news/javascript-async-await-tutorial-learn-callbacks-promises-async-await-by-making-icecream/)
   
   > Videos:
 
@@ -22,9 +24,9 @@
 
 > JavaScript (JS) is a high-level, interpreted programming language that conforms to the ECMAScript specification.
 
-## Syntax
+## **Syntax**
 
-### - Variables and Constant
+### **Variables and Constant**
 
 ```js
 let num = 10;
@@ -33,7 +35,7 @@ var message2 = " var is the old way to create a variable"; // var doesn't follow
 const PI = 3.14; // constant
 ```
 
-### - Data types
+### **Data types**
 
 > to know a type of a variable:
 > `typeof` operator.
@@ -76,7 +78,7 @@ let myObject = {
 };
 ```
 
-### - Operators
+### **Operators**
 
 - Arithmetic operators `(+,-,*,/,%)`
 - Comparison operators `(==,===,!=,!==,>,<,<=,>=)`
@@ -85,7 +87,7 @@ let myObject = {
 
 - Logical operators `(!,&&,||)`
 
-### - If-Statements
+### **If-Statements**
 
 > Stander If statement :
 
@@ -139,7 +141,7 @@ console.log(currency2); // EUR
 
 ---
 
-### - Arrays
+### **Arrays**
 
 In JavaScript, arrays are used to store multiple values in a single variable. They can hold any type of data, including numbers, strings, objects, and even other arrays. Arrays are dynamic, meaning they can grow or shrink in size, and they are zero-indexed, which means the first element is at index 0.
 
@@ -334,7 +336,7 @@ There are several ways to create arrays in JavaScript:
 
 Arrays are a fundamental part of JavaScript, offering a wide range of methods to manipulate, transform, and access data efficiently. Understanding and using these methods effectively is crucial for working with data in JavaScript.
 
-### - Loops
+### **Loops**
 
 JavaScript provides several types of loops to iterate over arrays, objects, strings, and other iterable structures. Loops are essential for performing repetitive tasks efficiently. Here's an overview of the main types of loops in JavaScript:
 
@@ -519,7 +521,7 @@ Each loop type has its own use case, and understanding these differences can hel
 
 ---
 
-### - Functions
+### **Functions**
 
 > Functions are a fundamental concept in JavaScript, allowing you to group code into reusable blocks. Here are various aspects of functions in JavaScript:
 
@@ -530,6 +532,40 @@ function sayHello() {
 
 sayHello(); // Call the function
 ```
+#### Function Declarations
+
+A function declaration defines a named function and is hoisted to the top of its scope. This means that the function can be called before its declaration in the code.
+
+##### Syntax
+
+```javascript
+function functionName(parameters) {
+  // function body
+}
+```
+
+##### Example
+
+```javascript
+console.log(greet()); // Output: Hello, world!
+
+function greet() {
+  return "Hello, world!";
+}
+```
+
+In this example:
+
+- The `greet` function is declared using a function declaration.
+- The function can be called before its definition due to hoisting.
+
+##### Key Characteristics
+
+1. **Hoisting**: Function declarations are hoisted, meaning they are available throughout their scope, even before the line of code where they are defined.
+
+2. **Named Functions**: Function declarations have names, which are used for debugging and recursion.
+
+3. **Clear Syntax**: The syntax is straightforward and easily readable.
 
 #### Parameters
 
@@ -590,416 +626,82 @@ scopeExample();
 ```
 ---
 
-#### Function Expression
+#### Nested function scope
 
-A function expression defines a function inside an expression and assigns it to a variable. Function expressions are not hoisted, so they can only be used after their definition.
+Functions can be nested within other functions, creating a nested function scope. This nesting creates a hierarchy of scopes, where the inner function has access to variables and functions defined in its own scope, as well as those in the outer (enclosing) function's scope and the global scope. However, the reverse is not true; outer functions cannot access the inner function's scope.
 
-```javascript
-let sayHello = function () {
-  console.log("Hello, World!");
-};
-
-sayHello(); // Calling the function
-```
-
-In this example, `sayHello` is a variable holding an anonymous function. You must define the function before calling it.
-
----
-
-
-### Function Declarations vs Expressions
-
-In JavaScript, functions can be defined in two primary ways: through function declarations and function expressions. Both methods allow you to define functions, but they differ in syntax and behavior. Understanding these differences is crucial for writing effective and predictable code.
-
-#### Function Declarations
-
-A function declaration defines a named function and is hoisted to the top of its scope. This means that the function can be called before its declaration in the code.
-
-##### Syntax
+##### Example of Nested Function Scope
 
 ```javascript
-function functionName(parameters) {
-  // function body
-}
-```
+function outerFunction() {
+  let outerVariable = "I am from the outer function";
 
-##### Example
+  function innerFunction() {
+    let innerVariable = "I am from the inner function";
 
-```javascript
-console.log(greet()); // Output: Hello, world!
+    console.log(outerVariable); // Accessing outer function's variable
+    console.log(innerVariable); // Accessing inner function's variable
+  }
 
-function greet() {
-  return "Hello, world!";
-}
-```
-
-In this example:
-
-- The `greet` function is declared using a function declaration.
-- The function can be called before its definition due to hoisting.
-
-##### Key Characteristics
-
-1. **Hoisting**: Function declarations are hoisted, meaning they are available throughout their scope, even before the line of code where they are defined.
-
-2. **Named Functions**: Function declarations have names, which are used for debugging and recursion.
-
-3. **Clear Syntax**: The syntax is straightforward and easily readable.
-
-#### Function Expressions
-
-A function expression defines a function within an expression and is not hoisted. Function expressions can be named or anonymous. They are assigned to variables and can only be called after their definition.
-
-##### Syntax
-
-```javascript
-const functionName = function (parameters) {
-  // function body
-};
-```
-
-##### Example
-
-```javascript
-const greet = function () {
-  return "Hello, world!";
-};
-
-console.log(greet()); // Output: Hello, world!
-```
-
-In this example:
-
-- The `greet` function is defined using a function expression and assigned to a variable.
-- The function can only be called after its definition.
-
-##### Key Characteristics
-
-1. **No Hoisting**: Function expressions are not hoisted. The function can only be used after it has been defined.
-
-2. **Anonymous or Named**: Function expressions can be anonymous or named. Named function expressions help with debugging.
-
-   ```javascript
-   const greet = function sayHello() {
-     return "Hello, world!";
-   };
-   ```
-
-3. **Flexibility**: Function expressions are often used for creating functions dynamically and for functional programming patterns.
-
-#### Differences Between Function Declarations and Function Expressions
-
-1. **Hoisting**:
-
-   - **Function Declarations**: Are hoisted, allowing them to be used before their declaration.
-   - **Function Expressions**: Are not hoisted. They can only be called after they are defined.
-
-2. **Syntax and Readability**:
-
-   - **Function Declarations**: Have a clearer and more traditional syntax. They are straightforward and easily readable.
-   - **Function Expressions**: Can be more flexible but require careful handling due to the lack of hoisting.
-
-3. **Usage Context**:
-   - **Function Declarations**: Often used for defining functions that need to be available throughout their scope.
-   - **Function Expressions**: Useful for situations where functions are created and used as part of an expression, or when working with functional programming concepts.
-
-#### Examples in Context
-
-##### Function Declaration Example
-
-```javascript
-// Function declaration
-function calculateArea(radius) {
-  return Math.PI * radius * radius;
+  innerFunction();
+  // console.log(innerVariable); // Uncaught ReferenceError: innerVariable is not defined
 }
 
-console.log(calculateArea(5)); // Output: 78.53981633974483
-```
-
-##### Function Expression Example
-
-```javascript
-// Function expression
-const calculateArea = function (radius) {
-  return Math.PI * radius * radius;
-};
-
-console.log(calculateArea(5)); // Output: 78.53981633974483
-```
-
-In summary, function declarations and function expressions are two ways to define functions in JavaScript. Function declarations are hoisted and can be used before their definition, while function expressions are not hoisted and can be used only after they are defined. Understanding when and how to use each type is key to writing clear and effective JavaScript code.
-
----
-
-#### Arrow Functions (ES6+)
-
-Arrow functions, introduced in ES6, offer a concise and modern syntax for writing functions in JavaScript. They are especially useful for short, single-purpose functions, and are commonly used in callbacks, array methods, and functional programming.
-
-**Basic Syntax:**
-
-```javascript
-const sayHello = () => {
-  console.log("Hello, World!");
-};
-
-sayHello(); // Output: Hello, World!
-```
-
-**Implicit Return:**
-
-If the function body contains only a single expression, you can omit the curly braces and the `return` keyword. The value of the expression is returned automatically.
-
-```javascript
-const add = (a, b) => a + b;
-
-console.log(add(2, 3)); // Output: 5
-```
-
-**Single Parameter:**
-
-When there is only one parameter, parentheses are optional.
-
-```javascript
-const square = x => x * x;
-
-console.log(square(4)); // Output: 16
-```
-
-**No Parameters:**
-
-For functions with no parameters, use empty parentheses.
-
-```javascript
-const greet = () => console.log("Hi!");
-
-greet(); // Output: Hi!
-```
-
-**Arrow Functions and `this`:**
-
-Arrow functions do **not** have their own `this` binding. Instead, they inherit `this` from the surrounding (lexical) scope. This makes them particularly useful in scenarios like event handlers or callbacks, where you want to preserve the context.
-
-```javascript
-function Counter() {
-  this.count = 0;
-  setInterval(() => {
-    this.count++;
-    console.log(this.count);
-  }, 1000);
-}
-
-const counter = new Counter();
-// Logs: 1, 2, 3, ... (every second)
+outerFunction();
 ```
 
 **Key Points:**
 
-- Arrow functions are concise and ideal for small, simple functions.
-- They do not have their own `this`, `arguments`, `super`, or `new.target`.
-- Cannot be used as constructors (not suitable with `new`).
-- Great for callbacks, array methods, and functional programming patterns.
-- Not recommended when a function needs its own `this` or is used as a method in an object.
+1. **Inner Function Access**: The `innerFunction` can access both `outerVariable` and `innerVariable`. This is because `innerFunction` is defined within `outerFunction`, giving it access to the outer function's scope.
+2. **Outer Function Access**: The `outerFunction` cannot access `innerVariable` because it is defined within `innerFunction`. Variables are only accessible within the scope they are defined in or any nested (inner) scopes.
 
-#### Callback Functions
+##### Scope Chain
 
-A callback function is a function passed as an argument to another function, to be executed after an operation completes. Callbacks are commonly used for asynchronous operations in JavaScript.
+When a variable is accessed, JavaScript searches for the variable in the current function's scope. If not found, it moves up to the enclosing function's scope, continuing this process until it reaches the global scope. This process is known as the **scope chain**.
+
+##### Example with Multiple Nesting Levels
 
 ```javascript
-function fetchData(callback) {
-  // Simulate an asynchronous operation
-  setTimeout(() => {
-    const data = "Some data";
-    callback(data);
-  }, 1000);
+let globalVar = "I am a global variable";
+
+function outerFunction() {
+  let outerVar = "I am an outer function variable";
+
+  function middleFunction() {
+    let middleVar = "I am a middle function variable";
+
+    function innerFunction() {
+      let innerVar = "I am an inner function variable";
+
+      console.log(globalVar); // Accessible
+      console.log(outerVar); // Accessible
+      console.log(middleVar); // Accessible
+      console.log(innerVar); // Accessible
+    }
+
+    innerFunction();
+
+    // console.log(innerVar); // Uncaught ReferenceError: innerVar is not defined
+  }
+
+  middleFunction();
+  // console.log(middleVar); // Uncaught ReferenceError: middleVar is not defined
 }
 
-fetchData((result) => {
-  console.log("Data received:", result);
-});
+outerFunction();
 ```
 
-In this example, `fetchData` takes a callback and calls it with the result after a delay.
+In this example:
+
+- `innerFunction` can access variables from its own scope (`innerVar`), its parent (`middleVar`), grandparent (`outerVar`), and the global scope (`globalVar`).
+- `middleFunction` can access `outerVar` and `globalVar`, but not `innerVar`.
+- `outerFunction` can access `globalVar`, but not `middleVar` or `innerVar`.
+
+##### Conclusion
+
+Nested functions and their scopes are fundamental concepts in JavaScript, enabling powerful features like closures. Understanding how scope and scope chains work is crucial for managing variables and avoiding common pitfalls such as accidental variable shadowing or leaks. The use of closures can lead to more flexible and reusable code, especially in functional programming paradigms.
 
 ---
-
-#### Higher-Order Functions
-
-> Functions that take other functions as arguments or return functions.
-
-```javascript
-function multiplyBy(factor) {
-  return function (number) {
-    return number * factor;
-  };
-}
-
-const double = multiplyBy(2);
-console.log(double(5)); // Output: 10
-```
-
-#### Factory Functions
-
-Factory functions in JavaScript are functions that create and return objects. They are a useful pattern for object creation without the need for classes or the `new` keyword. Factory functions can encapsulate the logic of object creation, and they can also include methods and properties.
-
-Here's a basic example of a factory function:
-
-##### Basic Factory Function Example:
-
-```javascript
-function createPerson(name, age) {
-  return {
-    name: name,
-    age: age,
-    greet: function () {
-      console.log(
-        `Hello, my name is ${this.name} and I am ${this.age} years old.`
-      );
-    },
-  };
-}
-
-const person1 = createPerson("Alice", 30);
-const person2 = createPerson("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
-```
-
-In this example, the `createPerson` factory function creates a new object with the properties `name` and `age` and a method `greet`. Each call to `createPerson` returns a new object with the specified properties and methods.
-
-##### Advantages of Factory Functions:
-
-1. **Encapsulation**: Factory functions can encapsulate the details of object creation and initialization, making your code cleaner and more maintainable.
-2. **No `new` Keyword**: Factory functions do not require the `new` keyword, which can help avoid some common pitfalls related to `this` binding and inheritance in JavaScript.
-3. **Dynamic Object Creation**: You can use factory functions to create objects with properties and methods based on dynamic conditions or inputs.
-4. **No Prototypal Inheritance Issues**: Factory functions avoid issues related to prototypal inheritance, as they return plain objects.
-
-##### Using Factory Functions with Closures:
-
-Factory functions can also leverage closures to create private variables and functions. Here's an example:
-
-```javascript
-function createCounter() {
-  let count = 0; // Private variable
-
-  return {
-    increment: function () {
-      count++;
-      return count;
-    },
-    decrement: function () {
-      count--;
-      return count;
-    },
-    getCount: function () {
-      return count;
-    },
-  };
-}
-
-const counter = createCounter();
-console.log(counter.increment()); // Output: 1
-console.log(counter.increment()); // Output: 2
-console.log(counter.decrement()); // Output: 1
-console.log(counter.getCount()); // Output: 1
-```
-
-In this example, `count` is a private variable, and the returned object has methods to manipulate and access the `count` value. The variable `count` is not directly accessible from outside the factory function, providing a way to encapsulate and protect data.
-
-#### Constructor functions
-
-In JavaScript, constructor functions are a way to create and initialize objects. They are similar to classes in other programming languages. Constructor functions provide a blueprint for creating objects with specific properties and methods. The `new` keyword is used to create instances of objects from these functions.
-
-##### Creating a Constructor Function
-
-To define a constructor function, you typically use a capitalized name to indicate that it's a constructor. Here's an example:
-
-```javascript
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
-
-  this.greet = function () {
-    console.log(
-      `Hello, my name is ${this.name} and I am ${this.age} years old.`
-    );
-  };
-}
-
-const person1 = new Person("Alice", 30);
-const person2 = new Person("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
-```
-
-##### Key Points about Constructor Functions
-
-1. **The `new` Keyword**: When you use the `new` keyword with a constructor function:
-
-   - A new object is created.
-   - The constructor function's `this` keyword points to the newly created object.
-   - The new object is implicitly returned at the end of the function (unless another object is explicitly returned).
-
-2. **Instance Properties and Methods**: In the example above, `name` and `age` are instance properties, and `greet` is an instance method. Each new object created with `new Person(...)` will have its own copies of these properties and methods.
-
-3. **Prototype**: To avoid recreating methods for every instance, you can define methods on the constructor's prototype. This makes the methods shared among all instances, saving memory and improving performance.
-
-##### Using Prototypes
-
-Here's an example of defining methods on the prototype:
-
-```javascript
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
-}
-
-Person.prototype.greet = function () {
-  console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
-};
-
-const person1 = new Person("Alice", 30);
-const person2 = new Person("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
-```
-
-In this example, the `greet` method is defined on `Person.prototype`. All instances of `Person` share the same `greet` method, rather than each having its own copy. This is more memory-efficient.
-
-##### Advantages of Constructor Functions
-
-1. **Reusability**: You can create multiple instances of an object type easily.
-2. **Encapsulation**: Properties and methods specific to an object type can be encapsulated within the constructor function and its prototype.
-3. **Inheritance**: Constructor functions can leverage prototypal inheritance, allowing you to create more complex object hierarchies.
-
-##### Modern Alternatives: ES6 Classes
-
-With the introduction of ES6, JavaScript also supports the `class` syntax, which provides a more straightforward and familiar way to define constructor functions and handle inheritance. Here's the previous example using ES6 class syntax:
-
-```javascript
-class Person {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  greet() {
-    console.log(
-      `Hello, my name is ${this.name} and I am ${this.age} years old.`
-    );
-  }
-}
-
-const person1 = new Person("Alice", 30);
-const person2 = new Person("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
-```
-
-The `class` syntax is syntactic sugar over the prototypal inheritance model in JavaScript and offers a more concise and readable way to define constructor functions and methods.
 
 #### Built-in functions for mathematical
 
@@ -1158,7 +860,7 @@ Here are some commonly used functions and properties available in the `Math` obj
 
 These functions are part of the `Math` object and are used without creating an instance of `Math`. They cover a wide range of mathematical operations, making them very useful for calculations in JavaScript applications.
 
-### String methods
+### **String methods**
 
 JavaScript provides a variety of string methods to manipulate and work with text. These methods are called on string objects or string literals and return a new string or a modified version of the original string. Here are some of the most commonly used JavaScript string methods:
 
@@ -1336,7 +1038,7 @@ These methods provide a rich set of tools for manipulating and working with stri
 
 ---
 
-### - Objects
+### **Objects**
 
 > An object is a collection of properties and each property has its own name associated with a value.
 
@@ -1724,7 +1426,7 @@ Choosing between shallow and deep cloning depends on your specific use case. If 
 
 ---
 
-### The Date Object
+### **The Date Object**
 
 The `Date` object in JavaScript is used to work with dates and times. It provides methods for getting and setting the year, month, day, hour, minute, second, and millisecond, as well as for formatting and parsing dates.
 
@@ -1932,7 +1634,7 @@ The `Date` object in JavaScript is versatile and can be used for a wide range of
 
 ---
 
-### - Document Object Model (DOM)
+### **Document Object Model (DOM)**
 
 > - DOM is a programming interface for web documents. It represents and manipulates the structure of a document.
 > - DOM also has properties and methods.
@@ -2062,7 +1764,7 @@ You can add event listeners to elements to respond to user interactions.
   });
   ```
 
-#### Example: Changing the Background Color
+##### Example: Changing the Background Color
 
 ```html
 <!DOCTYPE html>
@@ -2090,11 +1792,11 @@ You can add event listeners to elements to respond to user interactions.
 
 ---
 
-### - HTML, CSS, and JavaScript Together
+### **HTML, CSS, and JavaScript Together**
 
 ---
 
-### JavaScript Regex
+### **JavaScript Regex**
 
 Regular expressions (regex) in JavaScript share many similarities with regular expressions in other programming languages and systems, but there are some differences. These differences mainly arise from language-specific features and the specific implementations of regex engines. Here are some key points:
 
@@ -2213,86 +1915,391 @@ This regex pattern checks for a valid email format or either `@gmail.com` or `@h
 
 ---
 
-## Advanced JavaScript
+## **Advanced JavaScript**
 
-### Nested function scope
+### **Advanced Functions**
 
-Functions can be nested within other functions, creating a nested function scope. This nesting creates a hierarchy of scopes, where the inner function has access to variables and functions defined in its own scope, as well as those in the outer (enclosing) function's scope and the global scope. However, the reverse is not true; outer functions cannot access the inner function's scope.
+#### **Function Expression**
 
-#### Example of Nested Function Scope
+A function expression defines a function inside an expression and assigns it to a variable. Function expressions are not hoisted, so they can only be used after their definition.
 
 ```javascript
-function outerFunction() {
-  let outerVariable = "I am from the outer function";
+let sayHello = function () {
+  console.log("Hello, World!");
+};
 
-  function innerFunction() {
-    let innerVariable = "I am from the inner function";
-
-    console.log(outerVariable); // Accessing outer function's variable
-    console.log(innerVariable); // Accessing inner function's variable
-  }
-
-  innerFunction();
-  // console.log(innerVariable); // Uncaught ReferenceError: innerVariable is not defined
-}
-
-outerFunction();
+sayHello(); // Calling the function
 ```
 
-**Key Points:**
+In this example, `sayHello` is a variable holding an anonymous function. You must define the function before calling it.
 
-1. **Inner Function Access**: The `innerFunction` can access both `outerVariable` and `innerVariable`. This is because `innerFunction` is defined within `outerFunction`, giving it access to the outer function's scope.
-2. **Outer Function Access**: The `outerFunction` cannot access `innerVariable` because it is defined within `innerFunction`. Variables are only accessible within the scope they are defined in or any nested (inner) scopes.
+---
 
-#### Scope Chain
+##### Function Declarations vs Expressions
 
-When a variable is accessed, JavaScript searches for the variable in the current function's scope. If not found, it moves up to the enclosing function's scope, continuing this process until it reaches the global scope. This process is known as the **scope chain**.
+In JavaScript, functions can be defined in two primary ways: through function declarations and function expressions. Both methods allow you to define functions, but they differ in syntax and behavior. Understanding these differences is crucial for writing effective and predictable code.
 
-##### Example with Multiple Nesting Levels
+##### Function Expressions
+
+A function expression defines a function within an expression and is not hoisted. Function expressions can be named or anonymous. They are assigned to variables and can only be called after their definition.
+
+##### Syntax
 
 ```javascript
-let globalVar = "I am a global variable";
+const functionName = function (parameters) {
+  // function body
+};
+```
 
-function outerFunction() {
-  let outerVar = "I am an outer function variable";
+##### Example
 
-  function middleFunction() {
-    let middleVar = "I am a middle function variable";
+```javascript
+const greet = function () {
+  return "Hello, world!";
+};
 
-    function innerFunction() {
-      let innerVar = "I am an inner function variable";
-
-      console.log(globalVar); // Accessible
-      console.log(outerVar); // Accessible
-      console.log(middleVar); // Accessible
-      console.log(innerVar); // Accessible
-    }
-
-    innerFunction();
-
-    // console.log(innerVar); // Uncaught ReferenceError: innerVar is not defined
-  }
-
-  middleFunction();
-  // console.log(middleVar); // Uncaught ReferenceError: middleVar is not defined
-}
-
-outerFunction();
+console.log(greet()); // Output: Hello, world!
 ```
 
 In this example:
 
-- `innerFunction` can access variables from its own scope (`innerVar`), its parent (`middleVar`), grandparent (`outerVar`), and the global scope (`globalVar`).
-- `middleFunction` can access `outerVar` and `globalVar`, but not `innerVar`.
-- `outerFunction` can access `globalVar`, but not `middleVar` or `innerVar`.
+- The `greet` function is defined using a function expression and assigned to a variable.
+- The function can only be called after its definition.
 
-#### Conclusion
+##### Key Characteristics
 
-Nested functions and their scopes are fundamental concepts in JavaScript, enabling powerful features like closures. Understanding how scope and scope chains work is crucial for managing variables and avoiding common pitfalls such as accidental variable shadowing or leaks. The use of closures can lead to more flexible and reusable code, especially in functional programming paradigms.
+1. **No Hoisting**: Function expressions are not hoisted. The function can only be used after it has been defined.
+
+2. **Anonymous or Named**: Function expressions can be anonymous or named. Named function expressions help with debugging.
+
+   ```javascript
+   const greet = function sayHello() {
+     return "Hello, world!";
+   };
+   ```
+
+3. **Flexibility**: Function expressions are often used for creating functions dynamically and for functional programming patterns.
+
+##### Differences Between Function Declarations and Function Expressions
+
+1. **Hoisting**:
+
+   - **Function Declarations**: Are hoisted, allowing them to be used before their declaration.
+   - **Function Expressions**: Are not hoisted. They can only be called after they are defined.
+
+2. **Syntax and Readability**:
+
+   - **Function Declarations**: Have a clearer and more traditional syntax. They are straightforward and easily readable.
+   - **Function Expressions**: Can be more flexible but require careful handling due to the lack of hoisting.
+
+3. **Usage Context**:
+   - **Function Declarations**: Often used for defining functions that need to be available throughout their scope.
+   - **Function Expressions**: Useful for situations where functions are created and used as part of an expression, or when working with functional programming concepts.
+
+##### Examples in Context
+
+##### Function Declaration Example
+
+```javascript
+// Function declaration
+function calculateArea(radius) {
+  return Math.PI * radius * radius;
+}
+
+console.log(calculateArea(5)); // Output: 78.53981633974483
+```
+
+##### Function Expression Example
+
+```javascript
+// Function expression
+const calculateArea = function (radius) {
+  return Math.PI * radius * radius;
+};
+
+console.log(calculateArea(5)); // Output: 78.53981633974483
+```
+
+In summary, function declarations and function expressions are two ways to define functions in JavaScript. Function declarations are hoisted and can be used before their definition, while function expressions are not hoisted and can be used only after they are defined. Understanding when and how to use each type is key to writing clear and effective JavaScript code.
 
 ---
 
-### Closure
+#### **Arrow Functions (ES6+)**
+
+Arrow functions, introduced in ES6, offer a concise and modern syntax for writing functions in JavaScript. They are especially useful for short, single-purpose functions, and are commonly used in callbacks, array methods, and functional programming.
+
+**Basic Syntax:**
+
+```javascript
+const sayHello = () => {
+  console.log("Hello, World!");
+};
+
+sayHello(); // Output: Hello, World!
+```
+
+**Implicit Return:**
+
+If the function body contains only a single expression, you can omit the curly braces and the `return` keyword. The value of the expression is returned automatically.
+
+```javascript
+const add = (a, b) => a + b;
+
+console.log(add(2, 3)); // Output: 5
+```
+
+**Single Parameter:**
+
+When there is only one parameter, parentheses are optional.
+
+```javascript
+const square = x => x * x;
+
+console.log(square(4)); // Output: 16
+```
+
+**No Parameters:**
+
+For functions with no parameters, use empty parentheses.
+
+```javascript
+const greet = () => console.log("Hi!");
+
+greet(); // Output: Hi!
+```
+
+**Arrow Functions and `this`:**
+
+Arrow functions do **not** have their own `this` binding. Instead, they inherit `this` from the surrounding (lexical) scope. This makes them particularly useful in scenarios like event handlers or callbacks, where you want to preserve the context.
+
+```javascript
+function Counter() {
+  this.count = 0;
+  setInterval(() => {
+    this.count++;
+    console.log(this.count);
+  }, 1000);
+}
+
+const counter = new Counter();
+// Logs: 1, 2, 3, ... (every second)
+```
+
+**Key Points:**
+
+- Arrow functions are concise and ideal for small, simple functions.
+- They do not have their own `this`, `arguments`, `super`, or `new.target`.
+- Cannot be used as constructors (not suitable with `new`).
+- Great for callbacks, array methods, and functional programming patterns.
+
+---
+
+#### **Callback Functions**
+
+A callback function is a function passed as an argument to another function, to be executed after an operation completes. Callbacks are commonly used for asynchronous operations in JavaScript.
+
+```javascript
+function fetchData(callback) {
+  // Simulate an asynchronous operation
+  setTimeout(() => {
+    const data = "Some data";
+    callback(data);
+  }, 1000);
+}
+
+fetchData((result) => {
+  console.log("Data received:", result);
+});
+```
+
+In this example, `fetchData` takes a callback and calls it with the result after a delay.
+
+---
+
+#### Higher-Order Functions
+
+> Functions that take other functions as arguments or return functions.
+
+```javascript
+function multiplyBy(factor) {
+  return function (number) {
+    return number * factor;
+  };
+}
+
+const double = multiplyBy(2);
+console.log(double(5)); // Output: 10
+```
+
+#### Factory Functions
+
+Factory functions in JavaScript are functions that create and return objects. They are a useful pattern for object creation without the need for classes or the `new` keyword. Factory functions can encapsulate the logic of object creation, and they can also include methods and properties.
+
+Here's a basic example of a factory function:
+
+##### Basic Factory Function Example:
+
+```javascript
+function createPerson(name, age) {
+  return {
+    name: name,
+    age: age,
+    greet: function () {
+      console.log(
+        `Hello, my name is ${this.name} and I am ${this.age} years old.`
+      );
+    },
+  };
+}
+
+const person1 = createPerson("Alice", 30);
+const person2 = createPerson("Bob", 25);
+
+person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
+person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+```
+
+In this example, the `createPerson` factory function creates a new object with the properties `name` and `age` and a method `greet`. Each call to `createPerson` returns a new object with the specified properties and methods.
+
+##### Advantages of Factory Functions:
+
+1. **Encapsulation**: Factory functions can encapsulate the details of object creation and initialization, making your code cleaner and more maintainable.
+2. **No `new` Keyword**: Factory functions do not require the `new` keyword, which can help avoid some common pitfalls related to `this` binding and inheritance in JavaScript.
+3. **Dynamic Object Creation**: You can use factory functions to create objects with properties and methods based on dynamic conditions or inputs.
+4. **No Prototypal Inheritance Issues**: Factory functions avoid issues related to prototypal inheritance, as they return plain objects.
+
+##### Using Factory Functions with Closures:
+
+Factory functions can also leverage closures to create private variables and functions. Here's an example:
+
+```javascript
+function createCounter() {
+  let count = 0; // Private variable
+
+  return {
+    increment: function () {
+      count++;
+      return count;
+    },
+    decrement: function () {
+      count--;
+      return count;
+    },
+    getCount: function () {
+      return count;
+    },
+  };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // Output: 1
+console.log(counter.increment()); // Output: 2
+console.log(counter.decrement()); // Output: 1
+console.log(counter.getCount()); // Output: 1
+```
+
+In this example, `count` is a private variable, and the returned object has methods to manipulate and access the `count` value. The variable `count` is not directly accessible from outside the factory function, providing a way to encapsulate and protect data.
+
+#### Constructor functions
+
+In JavaScript, constructor functions are a way to create and initialize objects. They are similar to classes in other programming languages. Constructor functions provide a blueprint for creating objects with specific properties and methods. The `new` keyword is used to create instances of objects from these functions.
+
+##### Creating a Constructor Function
+
+To define a constructor function, you typically use a capitalized name to indicate that it's a constructor. Here's an example:
+
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+
+  this.greet = function () {
+    console.log(
+      `Hello, my name is ${this.name} and I am ${this.age} years old.`
+    );
+  };
+}
+
+const person1 = new Person("Alice", 30);
+const person2 = new Person("Bob", 25);
+
+person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
+person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+```
+
+##### Key Points about Constructor Functions
+
+1. **The `new` Keyword**: When you use the `new` keyword with a constructor function:
+
+   - A new object is created.
+   - The constructor function's `this` keyword points to the newly created object.
+   - The new object is implicitly returned at the end of the function (unless another object is explicitly returned).
+
+2. **Instance Properties and Methods**: In the example above, `name` and `age` are instance properties, and `greet` is an instance method. Each new object created with `new Person(...)` will have its own copies of these properties and methods.
+
+3. **Prototype**: To avoid recreating methods for every instance, you can define methods on the constructor's prototype. This makes the methods shared among all instances, saving memory and improving performance.
+
+##### Using Prototypes
+
+Here's an example of defining methods on the prototype:
+
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.greet = function () {
+  console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+};
+
+const person1 = new Person("Alice", 30);
+const person2 = new Person("Bob", 25);
+
+person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
+person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+```
+
+In this example, the `greet` method is defined on `Person.prototype`. All instances of `Person` share the same `greet` method, rather than each having its own copy. This is more memory-efficient.
+
+##### Advantages of Constructor Functions
+
+1. **Reusability**: You can create multiple instances of an object type easily.
+2. **Encapsulation**: Properties and methods specific to an object type can be encapsulated within the constructor function and its prototype.
+3. **Inheritance**: Constructor functions can leverage prototypal inheritance, allowing you to create more complex object hierarchies.
+
+##### Modern Alternatives: ES6 Classes
+
+With the introduction of ES6, JavaScript also supports the `class` syntax, which provides a more straightforward and familiar way to define constructor functions and handle inheritance. Here's the previous example using ES6 class syntax:
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() {
+    console.log(
+      `Hello, my name is ${this.name} and I am ${this.age} years old.`
+    );
+  }
+}
+
+const person1 = new Person("Alice", 30);
+const person2 = new Person("Bob", 25);
+
+person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
+person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+```
+
+The `class` syntax is syntactic sugar over the prototypal inheritance model in JavaScript and offers a more concise and readable way to define constructor functions and methods.
+
+---
+
+
+
+#### **Closure**
 
 A closure is formed when an inner function retains access to its lexical scope, even after the outer function has finished executing. This is possible because functions in JavaScript are first-class objects and can be returned and passed around, preserving their scope.
 
@@ -2313,7 +2320,7 @@ closure(); // Output: "I am an outer variable"
 
 In this example, `innerFunction` forms a closure that retains access to `outerVar` even after `outerFunction` has returned. This is because `innerFunction` was returned and assigned to `closure`, which still has access to the `outerVar`.
 
-### Currying
+#### **Currying**
 
 Currying is a functional programming technique that involves transforming a function with multiple arguments into a series of nested functions, each taking a single argument. In JavaScript, currying allows a function to be called with a subset of its arguments, returning a new function that takes the remaining arguments.
 
@@ -2441,7 +2448,7 @@ In JavaScript, **closures** and **currying** are powerful functional programming
 
 ---
 
-### **When to Use Closures and Currying **
+#### **When to Use Closures and Currying **
 
 A **closure** is a function that retains access to variables from its outer (enclosing) scope, even after the outer function has finished executing.
 
@@ -2540,7 +2547,7 @@ By leveraging closures and currying, you write more expressive, modular, and mai
 
 ---
 
-### "This" keyword
+### **"This" keyword**
 
 In JavaScript, the `this` keyword is a fundamental feature that refers to the context in which a function is called. The value of `this` can vary depending on how and where a function is invoked, and understanding how it works is crucial for effective JavaScript programming. Here's an overview of the `this` keyword in different scenarios:
 
@@ -2611,6 +2618,7 @@ console.log(alice.name); // Logs "Alice"
 #### 5. **Arrow Functions**
 
 Arrow functions have a lexical `this` binding, meaning they do not have their own `this`. Instead, `this` inside an arrow function refers to the `this` value from the surrounding (lexical) scope.
+- Not recommended when a function needs its own `this` or is used as a method in an object.
 
 ```javascript
 let obj = {
@@ -2695,7 +2703,7 @@ The behavior of the `this` keyword can sometimes be confusing, especially for be
 
 ---
 
-### Prototype
+### **Prototype**
 
 In JavaScript, prototypes are a key feature that allows for inheritance and the sharing of properties and methods among objects. Every JavaScript object has an internal property called `[[Prototype]]`, which points to another object or `null`. This prototype object can contain properties and methods that can be shared across all objects inheriting from it.
 
@@ -2807,7 +2815,7 @@ JavaScript's prototype system is powerful and flexible, allowing for efficient p
 
 ---
 
-### Class
+### **Class**
 
 In JavaScript, classes are a way to define objects and handle inheritance, introduced in ES6 (ECMAScript 2015). They provide a clearer and more concise syntax for creating and managing objects and are often used to model real-world entities.
 
@@ -2989,7 +2997,125 @@ This pattern enforces that `Shape` cannot be instantiated directly and that subc
 
 JavaScript classes provide a clear and concise way to define and manage objects and their relationships. They support inheritance, encapsulation, and abstraction, making it easier to model complex systems. While they offer a familiar syntax similar to other object-oriented languages like Java and C++, it's important to remember that they are built on JavaScript's prototype-based inheritance model.
 
-### Error handling: Try and Catch
+### **Prototypal inheritance**
+
+Prototypal inheritance is a feature in JavaScript that allows objects to inherit properties and methods from other objects. This is different from classical inheritance found in languages like Java or C++, where classes inherit from other classes. Instead, JavaScript uses prototypes to establish a form of inheritance.
+
+#### Key Concepts of Prototypal Inheritance
+
+1. **Prototype Chain**: Every object in JavaScript has an internal property called `[[Prototype]]`, which points to another object. This chain continues until it reaches an object with a `null` prototype, forming a prototype chain.
+
+2. **Prototype Object**: This is the object that is referred to by the `[[Prototype]]` property of another object. It can contain properties and methods that can be accessed by the inheriting object.
+
+3. **Inheritance Mechanism**: When a property or method is accessed on an object, JavaScript first looks for it on the object itself. If it's not found, it looks up the prototype chain until it finds the property/method or reaches the end of the chain.
+
+#### Example of Prototypal Inheritance
+
+#### Basic Example
+
+```javascript
+// Create a prototype object
+const animal = {
+  eat() {
+    console.log("Eating");
+  },
+};
+
+// Create a new object that inherits from animal
+const dog = Object.create(animal);
+dog.bark = function () {
+  console.log("Barking");
+};
+
+dog.eat(); // Output: Eating (inherited from animal)
+dog.bark(); // Output: Barking (own method)
+```
+
+In this example:
+
+- The `dog` object is created using `Object.create(animal)`, which sets the prototype of `dog` to `animal`.
+- `dog` can access the `eat` method from `animal` because of prototypal inheritance.
+
+#### Using Constructor Functions
+
+Constructor functions can also be used to set up prototypal inheritance.
+
+```javascript
+function Animal(name) {
+  this.name = name;
+}
+
+Animal.prototype.eat = function () {
+  console.log(`${this.name} is eating`);
+};
+
+function Dog(name, breed) {
+  Animal.call(this, name); // Call the parent constructor
+  this.breed = breed;
+}
+
+// Set the prototype of Dog to be an instance of Animal
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.bark = function () {
+  console.log(`${this.name} is barking`);
+};
+
+const myDog = new Dog("Rex", "Labrador");
+myDog.eat(); // Output: Rex is eating
+myDog.bark(); // Output: Rex is barking
+```
+
+In this example:
+
+- `Animal` is a constructor function with a method `eat` defined on its prototype.
+- `Dog` is another constructor function that calls `Animal` to inherit its properties.
+- `Dog.prototype` is set to an object created with `Animal.prototype` to establish the inheritance.
+- The constructor property is reset to `Dog` to maintain proper constructor linkage.
+
+#### ES6 Classes
+
+ES6 classes provide a more convenient syntax for creating objects and setting up inheritance but still use prototypal inheritance under the hood.
+
+```javascript
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  eat() {
+    console.log(`${this.name} is eating`);
+  }
+}
+
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name); // Call the parent constructor
+    this.breed = breed;
+  }
+
+  bark() {
+    console.log(`${this.name} is barking`);
+  }
+}
+
+const myDog = new Dog("Rex", "Labrador");
+myDog.eat(); // Output: Rex is eating
+myDog.bark(); // Output: Rex is barking
+```
+
+In this example:
+
+- `Animal` and `Dog` are ES6 classes.
+- `Dog` uses the `extends` keyword to inherit from `Animal`.
+- The `super` keyword is used to call the constructor of the parent class.
+
+#### Summary
+
+Prototypal inheritance in JavaScript is a powerful and flexible way to share properties and methods across objects. It allows objects to inherit from other objects directly, enabling dynamic and flexible object-oriented programming. Understanding this concept is crucial for mastering JavaScript, as it underpins much of the language's behavior and capabilities.
+
+### **Error handling: Try and Catch**
 
 In JavaScript, `try...catch` is a block of code used for handling exceptions—errors that occur during the execution of a program. When an error occurs, the normal flow of the code is interrupted, and control is transferred to the `catch` block if present. This mechanism helps in gracefully handling errors, preventing the program from crashing, and providing meaningful error messages or alternative behavior.
 
@@ -3241,125 +3367,9 @@ Each of these errors has a specific use case, and catching them allows you to ha
 
 JavaScript does not have built-in exceptions like "index out of bounds" that are automatically thrown for accessing invalid array indices. Instead, it returns `undefined` for such cases. However, you can implement custom error handling to enforce bounds checking and throw appropriate errors when needed. JavaScript provides a set of built-in error types that can be used to represent various kinds of runtime errors, making it easier to handle and debug issues.
 
-### Prototypal inheritance
+---
 
-Prototypal inheritance is a feature in JavaScript that allows objects to inherit properties and methods from other objects. This is different from classical inheritance found in languages like Java or C++, where classes inherit from other classes. Instead, JavaScript uses prototypes to establish a form of inheritance.
-
-#### Key Concepts of Prototypal Inheritance
-
-1. **Prototype Chain**: Every object in JavaScript has an internal property called `[[Prototype]]`, which points to another object. This chain continues until it reaches an object with a `null` prototype, forming a prototype chain.
-
-2. **Prototype Object**: This is the object that is referred to by the `[[Prototype]]` property of another object. It can contain properties and methods that can be accessed by the inheriting object.
-
-3. **Inheritance Mechanism**: When a property or method is accessed on an object, JavaScript first looks for it on the object itself. If it's not found, it looks up the prototype chain until it finds the property/method or reaches the end of the chain.
-
-#### Example of Prototypal Inheritance
-
-#### Basic Example
-
-```javascript
-// Create a prototype object
-const animal = {
-  eat() {
-    console.log("Eating");
-  },
-};
-
-// Create a new object that inherits from animal
-const dog = Object.create(animal);
-dog.bark = function () {
-  console.log("Barking");
-};
-
-dog.eat(); // Output: Eating (inherited from animal)
-dog.bark(); // Output: Barking (own method)
-```
-
-In this example:
-
-- The `dog` object is created using `Object.create(animal)`, which sets the prototype of `dog` to `animal`.
-- `dog` can access the `eat` method from `animal` because of prototypal inheritance.
-
-#### Using Constructor Functions
-
-Constructor functions can also be used to set up prototypal inheritance.
-
-```javascript
-function Animal(name) {
-  this.name = name;
-}
-
-Animal.prototype.eat = function () {
-  console.log(`${this.name} is eating`);
-};
-
-function Dog(name, breed) {
-  Animal.call(this, name); // Call the parent constructor
-  this.breed = breed;
-}
-
-// Set the prototype of Dog to be an instance of Animal
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
-
-Dog.prototype.bark = function () {
-  console.log(`${this.name} is barking`);
-};
-
-const myDog = new Dog("Rex", "Labrador");
-myDog.eat(); // Output: Rex is eating
-myDog.bark(); // Output: Rex is barking
-```
-
-In this example:
-
-- `Animal` is a constructor function with a method `eat` defined on its prototype.
-- `Dog` is another constructor function that calls `Animal` to inherit its properties.
-- `Dog.prototype` is set to an object created with `Animal.prototype` to establish the inheritance.
-- The constructor property is reset to `Dog` to maintain proper constructor linkage.
-
-#### ES6 Classes
-
-ES6 classes provide a more convenient syntax for creating objects and setting up inheritance but still use prototypal inheritance under the hood.
-
-```javascript
-class Animal {
-  constructor(name) {
-    this.name = name;
-  }
-
-  eat() {
-    console.log(`${this.name} is eating`);
-  }
-}
-
-class Dog extends Animal {
-  constructor(name, breed) {
-    super(name); // Call the parent constructor
-    this.breed = breed;
-  }
-
-  bark() {
-    console.log(`${this.name} is barking`);
-  }
-}
-
-const myDog = new Dog("Rex", "Labrador");
-myDog.eat(); // Output: Rex is eating
-myDog.bark(); // Output: Rex is barking
-```
-
-In this example:
-
-- `Animal` and `Dog` are ES6 classes.
-- `Dog` uses the `extends` keyword to inherit from `Animal`.
-- The `super` keyword is used to call the constructor of the parent class.
-
-#### Summary
-
-Prototypal inheritance in JavaScript is a powerful and flexible way to share properties and methods across objects. It allows objects to inherit from other objects directly, enabling dynamic and flexible object-oriented programming. Understanding this concept is crucial for mastering JavaScript, as it underpins much of the language's behavior and capabilities.
-
-### Iterables and iterators protocol
+### **Iterables and iterators protocol**
 
 In JavaScript, iterables and iterators are fundamental concepts that allow you to work with collections of data in a uniform way. They are central to the design of loops, particularly the `for...of` loop, and are used in many JavaScript APIs.
 
@@ -3511,7 +3521,7 @@ In this example:
 
 Iterables and iterators provide a standard way to loop over data structures in JavaScript. They are fundamental to understanding how data can be traversed, especially with the `for...of` loop and various modern APIs like `Map` and `Set`. Understanding these concepts is key to working with collections and asynchronous data in JavaScript.
 
-### Generators
+### **Generators**
 
 JavaScript generators are a special type of function introduced in ES6 (ECMAScript 2015) that allows you to define an iterative algorithm in a more powerful and flexible way. They enable functions to yield multiple values over time, pausing and resuming their execution as needed.
 
@@ -3651,7 +3661,7 @@ JavaScript generators provide a powerful way to work with iterative algorithms, 
 
 ---
 
-### Asynchronous JavaScript
+### **Asynchronous JavaScript**
 
 Asynchronous JavaScript is a core concept that enables JavaScript to handle operations that take time to complete—such as network requests, timers, or file reading—without blocking the main thread. This is essential for building responsive, interactive web applications.
 
@@ -3812,7 +3822,7 @@ Use async/await for most new code. Promises are still useful for chaining and pa
 
 ---
 
-#### Event Loop and Concurrency
+### **Event Loop and Concurrency**
 
 The JavaScript runtime uses an **event loop** to handle asynchronous operations and concurrency. Understanding this mechanism is crucial for writing non-blocking, efficient code.
 
@@ -3877,7 +3887,7 @@ Timeout
 
 ---
 
-#### Timeouts and Intervals
+### **Timeouts and Intervals**
 
 JavaScript provides two main functions for scheduling code execution:
 
