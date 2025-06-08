@@ -2096,7 +2096,9 @@ const counter = new Counter();
 
 #### **Callback Functions**
 
-A callback function is a function passed as an argument to another function, to be executed after an operation completes. Callbacks are commonly used for asynchronous operations in JavaScript.
+ **Callback function** is a function passed as an argument to another function, intended to be invoked after a certain operation completes. Callbacks are fundamental to asynchronous programming in JavaScript, enabling code to execute after tasks like data fetching, timers, or event handling.
+
+**Basic Example:**
 
 ```javascript
 function fetchData(callback) {
@@ -2112,13 +2114,75 @@ fetchData((result) => {
 });
 ```
 
-In this example, `fetchData` takes a callback and calls it with the result after a delay.
+In this example, `fetchData` accepts a callback and invokes it with the result after a delay.
+
+**Synchronous vs. Asynchronous Callbacks:**
+
+- *Synchronous callbacks* are executed immediately (e.g., array methods like `.map()`).
+- *Asynchronous callbacks* are executed later, after an operation completes (e.g., `setTimeout`, event listeners).
+
+**Error-First Callback Pattern:**
+
+A common convention is to pass an error as the first argument to the callback, and the result as the second:
+
+```javascript
+function fetchData(callback) {
+  setTimeout(() => {
+    const error = null; // or an Error object if something goes wrong
+    const data = "Some data";
+    callback(error, data);
+  }, 1000);
+}
+
+fetchData((err, result) => {
+  if (err) {
+    console.error("Error:", err);
+  } else {
+    console.log("Data received:", result);
+  }
+});
+```
+
+---
+
+##### **Callback Hell 🥵**
+
+**Callback hell** refers to the situation where callbacks are nested within other callbacks multiple levels deep, making code difficult to read, maintain, and debug. This often happens when performing a series of asynchronous operations that depend on each other.
+
+**Example of Callback Hell:**
+
+```javascript
+doTask1((result1) => {
+  doTask2(result1, (result2) => {
+    doTask3(result2, (result3) => {
+      doTask4(result3, (result4) => {
+        // ...and so on
+      });
+    });
+  });
+});
+```
+
+This "pyramid of doom" leads to:
+
+- Hard-to-read, deeply indented code
+- Difficult error handling and debugging
+- Maintenance challenges
+
+**How to Avoid Callback Hell:**
+
+- Use **named functions** instead of anonymous callbacks
+- Modularize code into smaller, reusable functions
+- Adopt modern alternatives like **Promises** and **async/await** for better readability and error handling
+
+**Summary:**  
+Callbacks are essential for asynchronous JavaScript, but excessive nesting leads to callback hell. Modern JavaScript features like Promises and async/await help write cleaner, more maintainable asynchronous code.
 
 ---
 
 #### Higher-Order Functions
 
-> Functions that take other functions as arguments or return functions.
+A **higher-order function** is a function that either takes one or more functions as arguments, returns a function, or both. This enables powerful patterns like function composition, callbacks, and functional utilities.
 
 ```javascript
 function multiplyBy(factor) {
@@ -2130,6 +2194,8 @@ function multiplyBy(factor) {
 const double = multiplyBy(2);
 console.log(double(5)); // Output: 10
 ```
+
+In this example, `multiplyBy` returns a new function that multiplies its input by the specified `factor`. Higher-order functions are widely used in JavaScript, especially with array methods like `.map()`, `.filter()`, and `.reduce()`.
 
 #### Factory Functions
 
@@ -3665,7 +3731,7 @@ JavaScript generators provide a powerful way to work with iterative algorithms, 
 
 Asynchronous JavaScript is a core concept that enables JavaScript to handle operations that take time to complete—such as network requests, timers, or file reading—without blocking the main thread. This is essential for building responsive, interactive web applications.
 
-#### What, Why, and How?
+> What, Why, and How?
 
 ##### What is Asynchronous JavaScript?
 
@@ -3685,8 +3751,6 @@ There are three main approaches:
 ---
 
 #### 1. **Callbacks**
-
-A **callback** is a function passed as an argument to another function, to be executed after a task completes.
 
 **Basic Example:**
 
@@ -3770,6 +3834,38 @@ fetchData()
 **Advantages:**  
 - Cleaner syntax for chaining asynchronous operations.
 - Centralized error handling with `.catch()`.
+
+---
+##### **Promises lifecycle**
+
+```plaintext
+            +--------------------+
+            |    Promise Created |
+            +--------------------+
+                    |
+                    v
+            +--------------------+
+            |   Pending State    |  (Initial state)
+            +--------------------+
+              /         \
+             v           v
++----------------+   +----------------+
+|  Resolved     |   |  Rejected       |
+| (Fulfilled)   |   | (Failed/Error)  |
++----------------+   +----------------+
+             \         /
+              v       v
+        +-------------------+
+        |  Settled State    |
+        +-------------------+
+```
+
+#### Breakdown:
+- **Promise Created:** A new promise is instantiated.
+- **Pending State:** The promise is neither resolved nor rejected.
+- **Resolved (Fulfilled):** The operation is successful, and `.then()` gets executed.
+- **Rejected (Failed/Error):** The operation fails, and `.catch()` gets executed.
+- **Settled State:** The promise reaches its final state—either resolved or rejected.
 
 ---
 
@@ -3997,7 +4093,7 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 ---
 
 ## - Projects and Ending
-
+Will add it later
 ---
 
 ## Notes:
