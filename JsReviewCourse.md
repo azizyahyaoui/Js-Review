@@ -2,6 +2,18 @@
 
 > Yahyaoui Med Aziz | 11052023.
 
+<details>
+  <summary>Links to resources:</summary>
+  - All related exercises and projects are organized in the same repository and divided into levels.
+
+  ---
+  
+  > Videos:
+
+  - [1- JavaScript Tutorial Full Course ](https://www.youtube.com/watch?v=EerdGm-ehJQ)
+
+  - [2- youtube playlist ](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
+</details>
 
 ## What is js ?
 
@@ -3978,7 +3990,4 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 ## Notes:
 
 
-## links to resources:
 
-[1- JavaScript Tutorial Full Course ](https://www.youtube.com/watch?v=EerdGm-ehJQ)
-[2- youtube playlist ](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
