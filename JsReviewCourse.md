@@ -13,7 +13,10 @@
   - [1- JavaScript Tutorial Full Course ](https://www.youtube.com/watch?v=EerdGm-ehJQ)
 
   - [2- youtube playlist ](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
+  
 </details>
+
+---
 
 ## What is js ?
 
