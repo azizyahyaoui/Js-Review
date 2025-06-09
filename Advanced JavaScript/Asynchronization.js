@@ -43,3 +43,14 @@ fetchDataWithCallback((data) => {
 } );
 
 // Using Promises
+
+
+
+//Promises chaining
+
+
+
+
+//Async/Await
+
+
