@@ -6,17 +6,20 @@
   <summary>Links to resources:</summary>
   - All related exercises and projects are organized in the same repository and divided into levels.
 
-  ---
+---
 
-  [freecodecamp async-await ](https://www.freecodecamp.org/news/javascript-async-await-tutorial-learn-callbacks-promises-async-await-by-making-icecream/)
-  
-  > Videos:
+- [freecodecamp async-await ](https://www.freecodecamp.org/news/javascript-async-await-tutorial-learn-callbacks-promises-async-await-by-making-icecream/)
 
-  - [1- JavaScript Tutorial Full Course ](https://www.youtube.com/watch?v=EerdGm-ehJQ)
+- [jestjs.io/docs](https://jestjs.io/docs/api)
 
-  - [2- youtube playlist ](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
-  
+> Videos:
+
+- [1- JavaScript Tutorial Full Course ](https://www.youtube.com/watch?v=EerdGm-ehJQ)
+
+- [2- youtube playlist ](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
+
 </details>
+
 
 ---
 
@@ -3063,123 +3066,128 @@ This pattern enforces that `Shape` cannot be instantiated directly and that subc
 
 JavaScript classes provide a clear and concise way to define and manage objects and their relationships. They support inheritance, encapsulation, and abstraction, making it easier to model complex systems. While they offer a familiar syntax similar to other object-oriented languages like Java and C++, it's important to remember that they are built on JavaScript's prototype-based inheritance model.
 
-### **Prototypal inheritance**
+### **Prototypal Inheritance**
 
-Prototypal inheritance is a feature in JavaScript that allows objects to inherit properties and methods from other objects. This is different from classical inheritance found in languages like Java or C++, where classes inherit from other classes. Instead, JavaScript uses prototypes to establish a form of inheritance.
+Prototypal inheritance is a core feature of JavaScript that enables objects to inherit properties and methods from other objects. Unlike classical inheritance (as in Java or C++), where classes inherit from other classes, JavaScript objects inherit directly from other objects via prototypes.
 
-#### Key Concepts of Prototypal Inheritance
+#### **Key Concepts**
 
-1. **Prototype Chain**: Every object in JavaScript has an internal property called `[[Prototype]]`, which points to another object. This chain continues until it reaches an object with a `null` prototype, forming a prototype chain.
+1. **Prototype Chain**  
+  Every JavaScript object has an internal `[[Prototype]]` property (commonly accessed via `__proto__` or set with `Object.create`). This property points to another object, forming a chain. When you access a property or method, JavaScript looks for it on the object itself, then up the prototype chain until it finds it or reaches `null`.
 
-2. **Prototype Object**: This is the object that is referred to by the `[[Prototype]]` property of another object. It can contain properties and methods that can be accessed by the inheriting object.
+2. **Prototype Object**  
+  The object referenced by `[[Prototype]]` is called the prototype. It can contain shared properties and methods that are accessible to all objects inheriting from it.
 
-3. **Inheritance Mechanism**: When a property or method is accessed on an object, JavaScript first looks for it on the object itself. If it's not found, it looks up the prototype chain until it finds the property/method or reaches the end of the chain.
+3. **Inheritance Mechanism**  
+  If a property or method isn't found on the object, JavaScript automatically looks up the prototype chain. This allows for efficient sharing of behavior and data.
 
-#### Example of Prototypal Inheritance
-
-#### Basic Example
+#### **Basic Example**
 
 ```javascript
-// Create a prototype object
 const animal = {
   eat() {
-    console.log("Eating");
+   console.log("Eating");
   },
 };
 
-// Create a new object that inherits from animal
-const dog = Object.create(animal);
+const dog = Object.create(animal); // dog inherits from animal
 dog.bark = function () {
   console.log("Barking");
 };
 
-dog.eat(); // Output: Eating (inherited from animal)
+dog.eat();  // Output: Eating (from prototype)
 dog.bark(); // Output: Barking (own method)
 ```
 
-In this example:
+- `dog`'s prototype is `animal`, so `dog` can use `animal`'s methods.
+- This is the essence of prototypal inheritance: objects inheriting from other objects.
 
-- The `dog` object is created using `Object.create(animal)`, which sets the prototype of `dog` to `animal`.
-- `dog` can access the `eat` method from `animal` because of prototypal inheritance.
+#### **Constructor Functions and Prototypes**
 
-#### Using Constructor Functions
-
-Constructor functions can also be used to set up prototypal inheritance.
+Constructor functions can establish inheritance by setting up the prototype chain:
 
 ```javascript
 function Animal(name) {
   this.name = name;
 }
-
 Animal.prototype.eat = function () {
   console.log(`${this.name} is eating`);
 };
 
 function Dog(name, breed) {
-  Animal.call(this, name); // Call the parent constructor
+  Animal.call(this, name); // Inherit properties
   this.breed = breed;
 }
-
-// Set the prototype of Dog to be an instance of Animal
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
+Dog.prototype = Object.create(Animal.prototype); // Inherit methods
+Dog.prototype.constructor = Dog; // Fix constructor reference
 
 Dog.prototype.bark = function () {
   console.log(`${this.name} is barking`);
 };
 
 const myDog = new Dog("Rex", "Labrador");
-myDog.eat(); // Output: Rex is eating
+myDog.eat();  // Output: Rex is eating
 myDog.bark(); // Output: Rex is barking
 ```
 
-In this example:
+- `Dog.prototype` is set to an object created from `Animal.prototype`, so all `Dog` instances inherit from `Animal`.
 
-- `Animal` is a constructor function with a method `eat` defined on its prototype.
-- `Dog` is another constructor function that calls `Animal` to inherit its properties.
-- `Dog.prototype` is set to an object created with `Animal.prototype` to establish the inheritance.
-- The constructor property is reset to `Dog` to maintain proper constructor linkage.
+#### **ES6 Classes (Syntactic Sugar)**
 
-#### ES6 Classes
-
-ES6 classes provide a more convenient syntax for creating objects and setting up inheritance but still use prototypal inheritance under the hood.
+ES6 classes provide a cleaner syntax but still use prototypal inheritance under the hood:
 
 ```javascript
 class Animal {
   constructor(name) {
-    this.name = name;
+   this.name = name;
   }
-
   eat() {
-    console.log(`${this.name} is eating`);
+   console.log(`${this.name} is eating`);
   }
 }
 
 class Dog extends Animal {
   constructor(name, breed) {
-    super(name); // Call the parent constructor
-    this.breed = breed;
+   super(name);
+   this.breed = breed;
   }
-
   bark() {
-    console.log(`${this.name} is barking`);
+   console.log(`${this.name} is barking`);
   }
 }
 
 const myDog = new Dog("Rex", "Labrador");
-myDog.eat(); // Output: Rex is eating
+myDog.eat();  // Output: Rex is eating
 myDog.bark(); // Output: Rex is barking
 ```
 
-In this example:
+- `extends` sets up the prototype chain automatically.
+- `super` calls the parent constructor.
 
-- `Animal` and `Dog` are ES6 classes.
-- `Dog` uses the `extends` keyword to inherit from `Animal`.
-- The `super` keyword is used to call the constructor of the parent class.
+#### **Important Rules and Notes**
 
-#### Summary
+- **No Circular References:**  
+  You cannot set an object's prototype to itself or create circular prototype chains (e.g., `animal.__proto__ = animal` is invalid).
+- **Prototype Must Be Object or Null:**  
+  The value of `__proto__` (or the prototype argument to `Object.create`) must be an object or `null`.
+- **Single Inheritance:**  
+  An object can only directly inherit from one prototype, but the chain can be multiple levels deep.
+- **Shared Methods:**  
+  Methods defined on the prototype are shared by all inheriting objects, saving memory and enabling polymorphism.
 
-Prototypal inheritance in JavaScript is a powerful and flexible way to share properties and methods across objects. It allows objects to inherit from other objects directly, enabling dynamic and flexible object-oriented programming. Understanding this concept is crucial for mastering JavaScript, as it underpins much of the language's behavior and capabilities.
+#### **Summary Table**
+
+| Feature                | Description                                                      |
+|------------------------|------------------------------------------------------------------|
+| Prototype Chain        | Objects inherit from other objects via `[[Prototype]]`           |
+| Inheritance Mechanism  | Property/method lookup climbs the prototype chain                |
+| Constructor Functions  | Set up inheritance by assigning prototypes                       |
+| ES6 Classes            | Syntactic sugar for prototype-based inheritance                  |
+| No Circular Prototypes | Prototypes must not form cycles                                  |
+| Single Prototype       | Each object has at most one direct prototype                     |
+
+Prototypal inheritance is fundamental to JavaScript's object system, enabling flexible, dynamic, and memory-efficient code reuse.
+
 
 ### **Error handling: Try and Catch**
 
@@ -4092,7 +4100,15 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 
 ---
 
-## **Testing JEST**
+## **Testing
+
+### **JEST**
+
+
+
+---
+
+### **Cypress**
 
 
 
@@ -4105,5 +4121,43 @@ Will add it later
 
 ## Notes:
 
+- Do not use innerHTML(slower xss) use doc fragments(faster)
+(const sanitizeInput = (inputValue) => {
+const div = document. createElement('div');
+div.textContent = inputValue;
+return div. innerHTML;}) using regex
 
 
+
+- Memoization "https://youtu.be/TWUV_LRVX24"
+
+- Decorators "@"
+
+- forEach is BAD! for Async Await Code
+
+- STOP Using Switch Statements:
+  - using Object
+    ```js
+    const extension = '/';
+
+    const extensionObj = {
+    '.css': 'text/css',
+    '.js': 'text/javascript',
+    '.json': 'application/json',
+    '.jpg': 'image/jpeg',
+    '.png': 'image/png',
+    '.txt': 'text/plain'
+    }
+    console.log(extensionObj[extension] || 'text/html')
+    ```
+  + Using Map
+    ```js
+    const myMap = new Map();
+    myMap.set('.css', 'text/css')
+    myMap.set('.json', 'application/json')
+
+    console. log(myMap.get(extension) || 'text/html')
+    ```
+
+  -  How to check for an empty array in Javascript:
+    [check here](https://youtu.be/ULniqxZ8ueI?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
