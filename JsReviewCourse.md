@@ -4,22 +4,21 @@
 
 <details>
   <summary>Links to resources:</summary>
+
   - All related exercises and projects are organized in the same repository and divided into levels.
 
----
+  > Docs:
+  - [freecodecamp async-await ](https://www.freecodecamp.org/news/javascript-async-await-tutorial-learn-callbacks-promises-async-await-by-making-icecream/)
 
-- [freecodecamp async-await ](https://www.freecodecamp.org/news/javascript-async-await-tutorial-learn-callbacks-promises-async-await-by-making-icecream/)
+  - [jestjs.io/docs](https://jestjs.io/docs/api)
 
-- [jestjs.io/docs](https://jestjs.io/docs/api)
+  > Videos:
 
-> Videos:
+  - [1- JavaScript Tutorial Full Course ](https://www.youtube.com/watch?v=EerdGm-ehJQ)
 
-- [1- JavaScript Tutorial Full Course ](https://www.youtube.com/watch?v=EerdGm-ehJQ)
-
-- [2- youtube playlist ](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
+  - [2- Advanced Javascript Concepts Dave Gray(PlayList)](https://www.youtube.com/playlist?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
 
 </details>
-
 
 ---
 
@@ -38,48 +37,183 @@ var message2 = " var is the old way to create a variable"; // var doesn't follow
 const PI = 3.14; // constant
 ```
 
-### **Data types**
+#### **Data types**
 
 > to know a type of a variable:
 > `typeof` operator.
 
-```javascript
-let num = 20;
-let str = "some text";
-console.log(typeof num); // number
-console.log(typeof str); // string
-```
+##### Primitive datatype:
 
-> Data types in java script :
+  ```javascript
+  let num = 20;
+  let str = "some text";
+  console.log(typeof num); // number
+  console.log(typeof str); // string
+  ```
 
-```javascript
-// String
-let myString = "Hello, world!";
+  > Data types in java script :
 
-// Number
-let myNumber = 12345;
+  ```javascript
+  // String
+  let myString = "Hello, world!";
 
-// BigInt
-let myBigInt = 12345678901234567890n;
+  // Number
+  let myNumber = 12345;
 
-// Boolean
-let myBoolean = true;
+  // BigInt
+  let myBigInt = 12345678901234567890n;
 
-// undefined
-let myUndefinedVariable;
+  // Boolean
+  let myBoolean = true;
 
-// Null
-let myNullVariable = null;
+  // undefined
+  let myUndefinedVariable;
 
-//NaN
-let myNotANumberVariable = NaN;
+  // Null
+  let myNullVariable = null;
 
-// Object
-let myObject = {
-  name: "John Doe",
-  age: 30,
-};
-```
+  // NaN
+  let myNotANumberVariable = NaN;
+
+  // Symbol (ES6)
+  let mySymbol = Symbol("unique");
+
+  // Const
+  const PI = 3.14;
+  ```
+
+#### **Symbols (ES6)**
+
+  The `Symbol` data type, introduced in ECMAScript 6 (ES6), is a primitive type used to create unique and immutable values. Symbols are primarily used as unique keys for object properties, helping to avoid naming collisions and enabling the creation of "hidden" or non-enumerable properties.
+
+  ###### **Key Characteristics**
+
+  - **Uniqueness:**  
+    Every symbol created with `Symbol()` is guaranteed to be unique, even if they share the same description.
+  - **Immutability:**  
+    Once created, a symbol's value cannot be changed.
+  - **Non-enumerability:**  
+    Symbol-keyed properties are not included in standard object property enumerations (like `for...in` or `Object.keys()`).
+
+  ##### **Creating Symbols**
+
+  You can create a symbol using the `Symbol()` function. An optional description can be provided for debugging purposes.
+
+  ```javascript
+  const sym1 = Symbol();
+  const sym2 = Symbol("myDescription");
+  const sym3 = Symbol("myDescription");
+
+  console.log(sym2 === sym3); // Output: false (each symbol is unique)
+  ```
+
+  ##### **Using Symbols as Object Property Keys**
+
+  Symbols are often used as keys for object properties to avoid property name conflicts.
+
+  ```javascript
+  const mySymbol = Symbol("uniqueKey");
+  const obj = {};
+
+  obj[mySymbol] = "hidden value";
+  console.log(obj[mySymbol]); // Output: "hidden value"
+  ```
+
+  - Symbol-keyed properties are not accessible via dot notation or string-based bracket notation:
+    ```javascript
+    console.log(obj.mySymbol); // undefined
+    console.log(obj["mySymbol"]); // undefined
+    ```
+
+  ##### **Accessing Symbol Properties**
+
+  To access symbol properties, you must use the symbol variable itself as the key.
+
+  ```javascript
+  console.log(obj[mySymbol]); // Output: "hidden value"
+  ```
+
+  ##### **Enumerating Symbol Properties**
+
+  Symbol properties are not included in typical object iteration, but can be accessed using reflection methods:
+
+  ```javascript
+  const symbols = Object.getOwnPropertySymbols(obj);
+  console.log(symbols); // Output: [Symbol(uniqueKey)]
+  console.log(obj[symbols[0]]); // Output: "hidden value"
+  ```
+
+  ##### **Use Cases**
+
+  - **Unique Object Property Keys:**  
+    Prevents accidental property name collisions in objects, especially in libraries or frameworks.
+  - **Simulating Private Properties:**  
+    While not truly private, symbol properties are less accessible and not exposed during normal enumeration.
+  - **Constants:**  
+    Symbols can be used to define unique constants for use in switch statements or configuration.
+
+  ##### **Example: Using Symbols for Constants**
+
+  ```javascript
+  const COLOR_RED = Symbol("red");
+  const COLOR_BLUE = Symbol("blue");
+
+  function getColorName(color) {
+    switch (color) {
+      case COLOR_RED:
+        return "Red";
+      case COLOR_BLUE:
+        return "Blue";
+      default:
+        return "Unknown";
+    }
+  }
+
+  console.log(getColorName(COLOR_RED)); // Output: "Red"
+  ```
+
+  ##### **Important Notes**
+
+  - Symbols are not truly private; they can be discovered using `Object.getOwnPropertySymbols()`.
+  - Symbols are not automatically converted to strings; attempting to concatenate them will throw an error.
+
+> Symbols provide a powerful way to create unique, non-colliding property keys and are a valuable addition to JavaScript's type system, especially for library authors and advanced object design.
+
+---
+
+#### Structural datatype:
+
+  ```javascript
+  // Array
+  let myArray = [1, 2, 3, 4, 5];
+
+  // Map
+  let myMap = new Map();
+  myMap.set("key1", "value1");
+  myMap.set("key2", "value2");
+
+  // Set
+  let mySet = new Set([1, 2, 3, 3, 4]);
+
+  // WeakMap
+  let myWeakMap = new WeakMap();
+  let objKey = {};
+  myWeakMap.set(objKey, "some value");
+
+  // Date
+  let myDate = new Date();
+
+  // Object
+  let myObject = {
+    name: "John Doe",
+    age: 30,
+  };
+
+  // Functions
+  function myFunction() {
+    return "Hello from function!";
+  }
+  ```
 
 ### **Operators**
 
@@ -1922,7 +2056,7 @@ This regex pattern checks for a valid email format or either `@gmail.com` or `@h
 
 ### **Advanced Functions**
 
-#### **Function Expression**
+#### Function Expressions
 
 A function expression defines a function inside an expression and assigns it to a variable. Function expressions are not hoisted, so they can only be used after their definition.
 
@@ -1936,25 +2070,15 @@ sayHello(); // Calling the function
 
 In this example, `sayHello` is a variable holding an anonymous function. You must define the function before calling it.
 
----
+##### Function Declarations vs. Function Expressions
 
-##### Function Declarations vs Expressions
+In JavaScript, functions can be defined in two primary ways: through function declarations and function expressions. Both methods allow you to define functions, but they differ in syntax and behavior.
 
-In JavaScript, functions can be defined in two primary ways: through function declarations and function expressions. Both methods allow you to define functions, but they differ in syntax and behavior. Understanding these differences is crucial for writing effective and predictable code.
+**Function Expressions:**
 
-##### Function Expressions
-
-A function expression defines a function within an expression and is not hoisted. Function expressions can be named or anonymous. They are assigned to variables and can only be called after their definition.
-
-##### Syntax
-
-```javascript
-const functionName = function (parameters) {
-  // function body
-};
-```
-
-##### Example
+- Not hoisted; can only be called after their definition.
+- Can be anonymous or named.
+- Useful for dynamic or functional programming patterns.
 
 ```javascript
 const greet = function () {
@@ -1964,47 +2088,12 @@ const greet = function () {
 console.log(greet()); // Output: Hello, world!
 ```
 
-In this example:
+**Function Declarations:**
 
-- The `greet` function is defined using a function expression and assigned to a variable.
-- The function can only be called after its definition.
-
-##### Key Characteristics
-
-1. **No Hoisting**: Function expressions are not hoisted. The function can only be used after it has been defined.
-
-2. **Anonymous or Named**: Function expressions can be anonymous or named. Named function expressions help with debugging.
-
-   ```javascript
-   const greet = function sayHello() {
-     return "Hello, world!";
-   };
-   ```
-
-3. **Flexibility**: Function expressions are often used for creating functions dynamically and for functional programming patterns.
-
-##### Differences Between Function Declarations and Function Expressions
-
-1. **Hoisting**:
-
-   - **Function Declarations**: Are hoisted, allowing them to be used before their declaration.
-   - **Function Expressions**: Are not hoisted. They can only be called after they are defined.
-
-2. **Syntax and Readability**:
-
-   - **Function Declarations**: Have a clearer and more traditional syntax. They are straightforward and easily readable.
-   - **Function Expressions**: Can be more flexible but require careful handling due to the lack of hoisting.
-
-3. **Usage Context**:
-   - **Function Declarations**: Often used for defining functions that need to be available throughout their scope.
-   - **Function Expressions**: Useful for situations where functions are created and used as part of an expression, or when working with functional programming concepts.
-
-##### Examples in Context
-
-##### Function Declaration Example
+- Hoisted; can be called before their definition.
+- Use traditional syntax.
 
 ```javascript
-// Function declaration
 function calculateArea(radius) {
   return Math.PI * radius * radius;
 }
@@ -2012,68 +2101,28 @@ function calculateArea(radius) {
 console.log(calculateArea(5)); // Output: 78.53981633974483
 ```
 
-##### Function Expression Example
+**Key Differences:**
 
-```javascript
-// Function expression
-const calculateArea = function (radius) {
-  return Math.PI * radius * radius;
-};
-
-console.log(calculateArea(5)); // Output: 78.53981633974483
-```
-
-In summary, function declarations and function expressions are two ways to define functions in JavaScript. Function declarations are hoisted and can be used before their definition, while function expressions are not hoisted and can be used only after they are defined. Understanding when and how to use each type is key to writing clear and effective JavaScript code.
+| Aspect         | Function Declaration | Function Expression |
+| -------------- | ------------------- | ------------------ |
+| Hoisting       | Yes                 | No                 |
+| Syntax         | Traditional         | Assigned to var    |
+| Use Case       | General             | Dynamic/Functional |
 
 ---
 
-#### **Arrow Functions (ES6+)**
+#### Arrow Functions (ES6+)
 
-Arrow functions, introduced in ES6, offer a concise and modern syntax for writing functions in JavaScript. They are especially useful for short, single-purpose functions, and are commonly used in callbacks, array methods, and functional programming.
-
-**Basic Syntax:**
-
-```javascript
-const sayHello = () => {
-  console.log("Hello, World!");
-};
-
-sayHello(); // Output: Hello, World!
-```
-
-**Implicit Return:**
-
-If the function body contains only a single expression, you can omit the curly braces and the `return` keyword. The value of the expression is returned automatically.
+Arrow functions offer a concise syntax for writing functions and are especially useful for short, single-purpose functions.
 
 ```javascript
 const add = (a, b) => a + b;
-
 console.log(add(2, 3)); // Output: 5
 ```
 
-**Single Parameter:**
-
-When there is only one parameter, parentheses are optional.
-
-```javascript
-const square = x => x * x;
-
-console.log(square(4)); // Output: 16
-```
-
-**No Parameters:**
-
-For functions with no parameters, use empty parentheses.
-
-```javascript
-const greet = () => console.log("Hi!");
-
-greet(); // Output: Hi!
-```
-
-**Arrow Functions and `this`:**
-
-Arrow functions do **not** have their own `this` binding. Instead, they inherit `this` from the surrounding (lexical) scope. This makes them particularly useful in scenarios like event handlers or callbacks, where you want to preserve the context.
+- **Single parameter:** `x => x * x`
+- **No parameters:** `() => console.log("Hi!")`
+- **No own `this`:** Inherit `this` from the lexical scope.
 
 ```javascript
 function Counter() {
@@ -2083,29 +2132,22 @@ function Counter() {
     console.log(this.count);
   }, 1000);
 }
-
-const counter = new Counter();
-// Logs: 1, 2, 3, ... (every second)
 ```
 
 **Key Points:**
 
-- Arrow functions are concise and ideal for small, simple functions.
-- They do not have their own `this`, `arguments`, `super`, or `new.target`.
-- Cannot be used as constructors (not suitable with `new`).
-- Great for callbacks, array methods, and functional programming patterns.
+- Concise syntax, ideal for callbacks and array methods.
+- No own `this`, `arguments`, `super`, or `new.target`.
+- Cannot be used as constructors.
 
 ---
 
-#### **Callback Functions**
+#### Callback Functions
 
- **Callback function** is a function passed as an argument to another function, intended to be invoked after a certain operation completes. Callbacks are fundamental to asynchronous programming in JavaScript, enabling code to execute after tasks like data fetching, timers, or event handling.
-
-**Basic Example:**
+A **callback function** is a function passed as an argument to another function, intended to be invoked after a certain operation completes.
 
 ```javascript
 function fetchData(callback) {
-  // Simulate an asynchronous operation
   setTimeout(() => {
     const data = "Some data";
     callback(data);
@@ -2117,21 +2159,12 @@ fetchData((result) => {
 });
 ```
 
-In this example, `fetchData` accepts a callback and invokes it with the result after a delay.
-
-**Synchronous vs. Asynchronous Callbacks:**
-
-- *Synchronous callbacks* are executed immediately (e.g., array methods like `.map()`).
-- *Asynchronous callbacks* are executed later, after an operation completes (e.g., `setTimeout`, event listeners).
-
 **Error-First Callback Pattern:**
-
-A common convention is to pass an error as the first argument to the callback, and the result as the second:
 
 ```javascript
 function fetchData(callback) {
   setTimeout(() => {
-    const error = null; // or an Error object if something goes wrong
+    const error = null;
     const data = "Some data";
     callback(error, data);
   }, 1000);
@@ -2146,46 +2179,33 @@ fetchData((err, result) => {
 });
 ```
 
----
+#### Callback Hell
 
-##### **Callback Hell 🥵**
-
-**Callback hell** refers to the situation where callbacks are nested within other callbacks multiple levels deep, making code difficult to read, maintain, and debug. This often happens when performing a series of asynchronous operations that depend on each other.
-
-**Example of Callback Hell:**
+Callback hell refers to deeply nested callbacks, making code hard to read and maintain.
 
 ```javascript
 doTask1((result1) => {
   doTask2(result1, (result2) => {
     doTask3(result2, (result3) => {
       doTask4(result3, (result4) => {
-        // ...and so on
+        // ...
       });
     });
   });
 });
 ```
 
-This "pyramid of doom" leads to:
+**How to Avoid:**
 
-- Hard-to-read, deeply indented code
-- Difficult error handling and debugging
-- Maintenance challenges
-
-**How to Avoid Callback Hell:**
-
-- Use **named functions** instead of anonymous callbacks
-- Modularize code into smaller, reusable functions
-- Adopt modern alternatives like **Promises** and **async/await** for better readability and error handling
-
-**Summary:**  
-Callbacks are essential for asynchronous JavaScript, but excessive nesting leads to callback hell. Modern JavaScript features like Promises and async/await help write cleaner, more maintainable asynchronous code.
+- Use named functions
+- Modularize code
+- Prefer Promises or async/await
 
 ---
 
 #### Higher-Order Functions
 
-A **higher-order function** is a function that either takes one or more functions as arguments, returns a function, or both. This enables powerful patterns like function composition, callbacks, and functional utilities.
+A **higher-order function** is a function that takes one or more functions as arguments, returns a function, or both.
 
 ```javascript
 function multiplyBy(factor) {
@@ -2198,119 +2218,45 @@ const double = multiplyBy(2);
 console.log(double(5)); // Output: 10
 ```
 
-In this example, `multiplyBy` returns a new function that multiplies its input by the specified `factor`. Higher-order functions are widely used in JavaScript, especially with array methods like `.map()`, `.filter()`, and `.reduce()`.
+---
 
 #### Factory Functions
 
-Factory functions in JavaScript are functions that create and return objects. They are a useful pattern for object creation without the need for classes or the `new` keyword. Factory functions can encapsulate the logic of object creation, and they can also include methods and properties.
-
-Here's a basic example of a factory function:
-
-##### Basic Factory Function Example:
+Factory functions create and return objects, providing encapsulation and flexibility without using classes or `new`.
 
 ```javascript
 function createPerson(name, age) {
   return {
-    name: name,
-    age: age,
-    greet: function () {
-      console.log(
-        `Hello, my name is ${this.name} and I am ${this.age} years old.`
-      );
+    name,
+    age,
+    greet() {
+      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
     },
   };
 }
 
 const person1 = createPerson("Alice", 30);
-const person2 = createPerson("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+person1.greet();
 ```
 
-In this example, the `createPerson` factory function creates a new object with the properties `name` and `age` and a method `greet`. Each call to `createPerson` returns a new object with the specified properties and methods.
-
-##### Advantages of Factory Functions:
-
-1. **Encapsulation**: Factory functions can encapsulate the details of object creation and initialization, making your code cleaner and more maintainable.
-2. **No `new` Keyword**: Factory functions do not require the `new` keyword, which can help avoid some common pitfalls related to `this` binding and inheritance in JavaScript.
-3. **Dynamic Object Creation**: You can use factory functions to create objects with properties and methods based on dynamic conditions or inputs.
-4. **No Prototypal Inheritance Issues**: Factory functions avoid issues related to prototypal inheritance, as they return plain objects.
-
-##### Using Factory Functions with Closures:
-
-Factory functions can also leverage closures to create private variables and functions. Here's an example:
+**With Closures:**
 
 ```javascript
 function createCounter() {
-  let count = 0; // Private variable
-
+  let count = 0;
   return {
-    increment: function () {
-      count++;
-      return count;
-    },
-    decrement: function () {
-      count--;
-      return count;
-    },
-    getCount: function () {
-      return count;
-    },
+    increment: () => ++count,
+    decrement: () => --count,
+    getCount: () => count,
   };
 }
-
-const counter = createCounter();
-console.log(counter.increment()); // Output: 1
-console.log(counter.increment()); // Output: 2
-console.log(counter.decrement()); // Output: 1
-console.log(counter.getCount()); // Output: 1
 ```
 
-In this example, `count` is a private variable, and the returned object has methods to manipulate and access the `count` value. The variable `count` is not directly accessible from outside the factory function, providing a way to encapsulate and protect data.
+---
 
-#### Constructor functions
+#### Constructor Functions
 
-In JavaScript, constructor functions are a way to create and initialize objects. They are similar to classes in other programming languages. Constructor functions provide a blueprint for creating objects with specific properties and methods. The `new` keyword is used to create instances of objects from these functions.
-
-##### Creating a Constructor Function
-
-To define a constructor function, you typically use a capitalized name to indicate that it's a constructor. Here's an example:
-
-```javascript
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
-
-  this.greet = function () {
-    console.log(
-      `Hello, my name is ${this.name} and I am ${this.age} years old.`
-    );
-  };
-}
-
-const person1 = new Person("Alice", 30);
-const person2 = new Person("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
-```
-
-##### Key Points about Constructor Functions
-
-1. **The `new` Keyword**: When you use the `new` keyword with a constructor function:
-
-   - A new object is created.
-   - The constructor function's `this` keyword points to the newly created object.
-   - The new object is implicitly returned at the end of the function (unless another object is explicitly returned).
-
-2. **Instance Properties and Methods**: In the example above, `name` and `age` are instance properties, and `greet` is an instance method. Each new object created with `new Person(...)` will have its own copies of these properties and methods.
-
-3. **Prototype**: To avoid recreating methods for every instance, you can define methods on the constructor's prototype. This makes the methods shared among all instances, saving memory and improving performance.
-
-##### Using Prototypes
-
-Here's an example of defining methods on the prototype:
+Constructor functions are blueprints for creating objects using the `new` keyword.
 
 ```javascript
 function Person(name, age) {
@@ -2323,23 +2269,10 @@ Person.prototype.greet = function () {
 };
 
 const person1 = new Person("Alice", 30);
-const person2 = new Person("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+person1.greet();
 ```
 
-In this example, the `greet` method is defined on `Person.prototype`. All instances of `Person` share the same `greet` method, rather than each having its own copy. This is more memory-efficient.
-
-##### Advantages of Constructor Functions
-
-1. **Reusability**: You can create multiple instances of an object type easily.
-2. **Encapsulation**: Properties and methods specific to an object type can be encapsulated within the constructor function and its prototype.
-3. **Inheritance**: Constructor functions can leverage prototypal inheritance, allowing you to create more complex object hierarchies.
-
-##### Modern Alternatives: ES6 Classes
-
-With the introduction of ES6, JavaScript also supports the `class` syntax, which provides a more straightforward and familiar way to define constructor functions and handle inheritance. Here's the previous example using ES6 class syntax:
+**Modern Alternative: ES6 Classes**
 
 ```javascript
 class Person {
@@ -2347,37 +2280,21 @@ class Person {
     this.name = name;
     this.age = age;
   }
-
   greet() {
-    console.log(
-      `Hello, my name is ${this.name} and I am ${this.age} years old.`
-    );
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
   }
 }
-
-const person1 = new Person("Alice", 30);
-const person2 = new Person("Bob", 25);
-
-person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
-person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
 ```
-
-The `class` syntax is syntactic sugar over the prototypal inheritance model in JavaScript and offers a more concise and readable way to define constructor functions and methods.
 
 ---
 
+#### Closures
 
-
-#### **Closure**
-
-A closure is formed when an inner function retains access to its lexical scope, even after the outer function has finished executing. This is possible because functions in JavaScript are first-class objects and can be returned and passed around, preserving their scope.
-
-##### Example of Closure
+A closure is formed when an inner function retains access to its lexical scope, even after the outer function has finished executing.
 
 ```javascript
 function outerFunction() {
   let outerVar = "I am an outer variable";
-
   return function innerFunction() {
     console.log(outerVar);
   };
@@ -2387,29 +2304,18 @@ let closure = outerFunction();
 closure(); // Output: "I am an outer variable"
 ```
 
-In this example, `innerFunction` forms a closure that retains access to `outerVar` even after `outerFunction` has returned. This is because `innerFunction` was returned and assigned to `closure`, which still has access to the `outerVar`.
+**When to Use Closures:**
 
-#### **Currying**
+- Preserve state (e.g., counters)
+- Data encapsulation (private variables)
+- Event handlers/callbacks
+- Functional helpers (factories, memoization)
 
-Currying is a functional programming technique that involves transforming a function with multiple arguments into a series of nested functions, each taking a single argument. In JavaScript, currying allows a function to be called with a subset of its arguments, returning a new function that takes the remaining arguments.
+---
 
-The primary advantage of currying is that it allows partial application of functions, enabling more flexible and reusable code. This can be particularly useful in scenarios where certain parameters are known ahead of time or remain constant across multiple calls.
+#### Currying
 
-#### Basic Example of Currying
-
-Let's start with a basic example to illustrate the concept:
-
-**Non-Curried Function:**
-
-```javascript
-function add(a, b) {
-  return a + b;
-}
-
-console.log(add(2, 3)); // Output: 5
-```
-
-**Curried Version:**
+Currying transforms a function with multiple arguments into a sequence of functions, each taking a single argument.
 
 ```javascript
 function add(a) {
@@ -2420,57 +2326,9 @@ function add(a) {
 
 const add2 = add(2);
 console.log(add2(3)); // Output: 5
-
-console.log(add(2)(3)); // Output: 5
 ```
 
-In the curried version:
-
-- `add(2)` returns a new function that expects the second argument, `b`.
-- This allows the function to be called in two stages: first with `a` and then with `b`.
-
-#### Practical Example: Currying with Multiple Parameters
-
-Currying can be applied to functions with more than two parameters. Here’s a simple example:
-
-**Non-Curried Function:**
-
-```javascript
-function multiply(a, b, c) {
-  return a * b * c;
-}
-
-console.log(multiply(2, 3, 4)); // Output: 24
-```
-
-**Curried Version:**
-
-```javascript
-function multiply(a) {
-  return function (b) {
-    return function (c) {
-      return a * b * c;
-    };
-  };
-}
-
-const multiplyBy2 = multiply(2);
-const multiplyBy2And3 = multiplyBy2(3);
-console.log(multiplyBy2And3(4)); // Output: 24
-
-console.log(multiply(2)(3)(4)); // Output: 24
-```
-
-In this example:
-
-- `multiply(2)` returns a function that takes `b` and returns another function that takes `c`.
-- This allows for partial application, where you can fix the first argument and use the resulting function with different sets of the remaining arguments.
-
-#### Automatic Currying with Higher-Order Functions
-
-In practice, manually creating curried functions can be tedious, especially for functions with many parameters. To automate currying, you can use higher-order functions that take a function as an input and return its curried version.
-
-**Example:**
+**Automatic Currying:**
 
 ```javascript
 function curry(fn) {
@@ -2484,136 +2342,93 @@ function curry(fn) {
     }
   };
 }
-
-function sum(a, b, c) {
-  return a + b + c;
-}
-
-const curriedSum = curry(sum);
-console.log(curriedSum(1)(2)(3)); // Output: 6
-console.log(curriedSum(1, 2)(3)); // Output: 6
-console.log(curriedSum(1)(2, 3)); // Output: 6
 ```
 
-Here:
+**When to Use Currying:**
 
-- `curry` is a function that takes a function `fn` and returns a curried version of it.
-- The `curried` function checks if the number of arguments provided matches the number of arguments expected by the original function (`fn.length`). If so, it calls the function with all the arguments. Otherwise, it returns another function to collect more arguments.
-
-#### Use Cases and Benefits of Currying
-
-1. **Partial Application**: Currying enables partial application, which allows you to fix a few arguments of a function and generate a new function.
-2. **Code Reusability**: It encourages creating small, reusable components that can be combined in flexible ways.
-3. **Function Composition**: Currying makes it easier to create functions that work together, particularly in functional programming paradigms.
-4. **Improved Readability**: By breaking down a function into smaller pieces, currying can make the code more readable and easier to understand.
-
-#### Conclusion
-
-Currying is a powerful concept in JavaScript, especially in functional programming. It allows for more modular, flexible, and reusable code by enabling partial application and function composition. Understanding currying can help you write cleaner, more efficient, and more maintainable JavaScript code.
+- Partial application
+- Function composition
+- Improved readability
+- Functional libraries
 
 ---
 
-In JavaScript, **closures** and **currying** are powerful functional programming concepts used to manage scope, state, and function composition. Here's a breakdown of when and where to use them:
-
----
-
-#### **When to Use Closures and Currying **
-
-A **closure** is a function that retains access to variables from its outer (enclosing) scope, even after the outer function has finished executing.
-
-#### **When to Use Closures**:
-
-- **Preserve State**: When you need a function to "remember" values from its creation scope (e.g., counters, timers).
-- **Data Encapsulation**: To create private variables (hide implementation details).
-- **Event Handlers/Callbacks**: To capture context (e.g., in `setTimeout`, promises, event listeners).
-- **Functional Helpers**: For factories, decorators, or memoization.
-
-#### **Example Use Cases**:
-
-```javascript
-// 1. Data Encapsulation (Private Variables)
-function createCounter() {
-  let count = 0; // "Private" variable
-  return {
-    increment: () => ++count,
-    getCount: () => count,
-  };
-}
-const counter = createCounter();
-counter.increment(); // 1
-counter.getCount(); // 1 (No direct access to `count`)
-
-// 2. Callback with Preserved Context
-function delayGreet(name) {
-  setTimeout(() => console.log(`Hello, ${name}!`), 1000); // Closure captures `name`
-}
-delayGreet("Alice"); // Logs "Hello, Alice!" after 1s
-
-// 3. Function Factory
-function multiplier(factor) {
-  return (x) => x * factor; // Closure retains `factor`
-}
-const double = multiplier(2);
-double(5); // 10
-```
-
----
-
-**Currying** converts a function with multiple arguments into a sequence of unary (single-argument) functions.
-
-#### **When to Use Currying**:
-
-- **Partial Application**: Fix some arguments upfront to create reusable specialized functions.
-- **Function Composition**: Simplify composing functions (e.g., in pipelines).
-- **Improved Readability**: Break complex multi-argument logic into simpler steps.
-- **Functional Libraries**: Used heavily in libraries like Ramda/Lodash for functional patterns.
-
-#### **Example Use Cases**:
-
-```javascript
-// 1. Partial Application
-const sum = (a) => (b) => (c) => a + b + c;
-const addTwo = sum(1)(1); // Fixes first two arguments
-addTwo(3); // 5 (1 + 1 + 3)
-
-// 2. Reusable Utility Functions
-const match = (regex) => (str) => str.match(regex); // Curried regex matcher
-const hasNumbers = match(/\d+/);
-hasNumbers("123abc"); // ["123"]
-hasNumbers("no-digits"); // null
-
-// 3. Function Composition
-const compose = (f, g) => (x) => f(g(x));
-const toUpper = (str) => str.toUpperCase();
-const exclaim = (str) => str + "!";
-const shout = compose(exclaim, toUpper); // Currying enables composition
-shout("hello"); // "HELLO!"
-```
-
----
-
-#### **Key Differences**:
+#### Closures vs. Currying: When and Why
 
 | **Closure**                        | **Currying**                          |
 | ---------------------------------- | ------------------------------------- |
-| General technique to retain state. | Specific transformation of functions. |
-| Created via nested functions.      | Explicitly returns nested functions.  |
-| Solves scope/state management.     | Solves multi-argument composition.    |
+| Retain state/scope                 | Transform multi-arg to unary functions|
+| Used for encapsulation, factories  | Used for partial application, composition|
+| Created via nested functions       | Explicitly returns nested functions   |
+
+**Real-World Applications:**
+
+- Closures: React hooks, Redux middleware, event listeners
+- Currying: Utility functions, validators, middleware chains
 
 ---
 
-#### **When NOT to Use**:
+By mastering these advanced function patterns—function expressions, arrow functions, callbacks, higher-order functions, factory and constructor functions, closures, and currying—you can write more expressive, modular, and maintainable JavaScript code.
 
-- **Closures**: Avoid overusing for trivial tasks (can cause memory overhead).
-- **Currying**: Don’t force it if direct multi-arg functions are clearer.
+#### Impure and Pure Functions
 
-#### **Real-World Applications**:
+#### Impure Functions
 
-- **Closures**: React hooks (e.g., `useState`), Redux middleware, event listeners.
-- **Currying**: Configurable utility functions (e.g., validators), middleware chains.
+An **impure function** is a function that produces side effects or relies on external state outside its scope. Side effects can include modifying global variables, changing input parameters, performing I/O operations (like logging to the console or writing to a file), or depending on data that can change outside the function.
 
-By leveraging closures and currying, you write more expressive, modular, and maintainable JavaScript code.
+**Example of an impure function:**
+```javascript
+let counter = 0;
+function increment() {
+  counter++; // modifies external state
+  return counter;
+}
+```
+- Here, `increment` changes the value of the external variable `counter`, making it impure.
 
+#### Pure Functions
+
+A **pure function** is a function that, given the same input, will always return the same output and does not produce any side effects. Pure functions do not modify external state or depend on it.
+
+**Example of a pure function:**
+```javascript
+function add(a, b) {
+  return a + b;
+}
+```
+- `add` always returns the same result for the same inputs and does not affect or rely on anything outside its scope.
+
+**Benefits of pure functions:**
+- Easier to test and debug
+- Predictable and reliable
+- Enable functional programming techniques like memoization and composition
+
+---
+> Note:
+  ```js
+// Pure Functions require you to avoid
+// mutating the data
+
+// Impure function that mutates the data
+const addToScoreHistory = (array, score) => {
+array.push(score);
+return array;
+}
+const scoreArray = [44, 23, 12];
+console.log(addToScoreHistory(scoreArray, 14));
+
+// This mutates the original array.
+// This is considered to be a side-effect.
+
+// Notice: "const" does not make the array immutable
+
+// There is much more to Pure Functions that I
+// will discuss in my next tutorial.
+
+// We need to modify our function so it does not
+// mutate the original data.
+  
+```
 ---
 
 ### **"This" keyword**
@@ -4100,7 +3915,7 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 
 ---
 
-## **Testing
+## **Testing**
 
 ### **JEST**
 
@@ -4114,27 +3929,59 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 
 ---
 
-## - Projects and Ending
+## **- Projects and Ending**
 Will add it later
 
 ---
 
-## Notes:
+## Notes and Best Practices:
 
-- Do not use innerHTML(slower xss) use doc fragments(faster)
-(const sanitizeInput = (inputValue) => {
-const div = document. createElement('div');
-div.textContent = inputValue;
-return div. innerHTML;}) using regex
+- Value vs Reference:
+  ```js
+  // Value vs Reference
+  // Primitives pass values:
+  let x = 2;
+  let y = x;
+  y += 1;
+  console.log(y);
+  console.log(x);
 
+  // Structural types use references:
+  let xArray = [1, 2, 3];
+  let yArray = xArray;
+  yArray.push(4);
+  console.log(yArray);
+  console.log(xArray);|
+  ```
+  > Review:
+    - Primitive vs Structural Data Types
+    - Primitives data types pass values
+    - Structural data types pass references
+    - Primitives data types are immutable
+    - Reassignment is not the same as mutable
+    - Structural data types contain mutable data
+    - Shallow copy vs. Deep copy (clones of data structures)
+    - Shallow copies still share references of nested structures
+    - which allows for mutation of the original data
+    - Object.freeze() creates a shallow freeze
+    - Deep copies share no references
 
+---
+- Do not use innerHTML
+    (slower xss) use doc fragments(faster)
+    (
+    ```js
+    const sanitizeInput = (inputValue) => {
+    const div = document. createElement('div');
+    div.textContent = inputValue;
+    return div. innerHTML;} // using regex also will be better
 
-- Memoization "https://youtu.be/TWUV_LRVX24"
+    ```
+    )
 
-- Decorators "@"
-
+---
 - forEach is BAD! for Async Await Code
-
+---
 - STOP Using Switch Statements:
   - using Object
     ```js
@@ -4161,3 +4008,28 @@ return div. innerHTML;}) using regex
 
   -  How to check for an empty array in Javascript:
     [check here](https://youtu.be/ULniqxZ8ueI?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
+
+---
+- Mutable vs Immutable
+  ```js
+    // Primitives are immutable
+    let myName = "Dave";
+    myName [0] = "W"; // nope!
+    console.log(myName);
+
+    // Reassignment is not the same as mutable
+    myName = "David";
+    console.log(myName);
+
+    // Structures contain mutable data
+    yArray[0] = 9;
+    console.log(yArray);
+    console.log(xArray);
+  ```
+---
+
+## ToAdd
+
+  - Memoization "https://youtu.be/TWUV_LRVX24"
+
+  - Decorators "@"
