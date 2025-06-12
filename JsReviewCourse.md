@@ -3915,6 +3915,266 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 
 ---
 
+
+### **🔁 Memoization**
+
+#### 💭 What is Memoization?
+
+> Memoization is an optimization technique that **caches** the results of function calls, so **next time** the function is called with the same arguments, it **returns the cached result instantly** instead of recalculating.
+
+📦 Think of it like:
+
+> "If I’ve done this before, I’ll just give you the answer from memory instead of doing the whole process again."
+
+---
+
+#### 🧠 Why Use It?
+
+* Avoid **repeating expensive calculations**
+* Improve **performance** for functions with **repetitive input**
+* Especially helpful in:
+
+  * **Recursive functions** (e.g. Fibonacci)
+  * **Heavy computations**
+  * **Rendering logic** (like in React)
+
+---
+
+#### 🧪 Simple Example (Without Memoization)
+
+```js
+function slowSquare(n) {
+    console.log("Calculating...");
+    return n * n;
+}
+
+slowSquare(4); // "Calculating..." → 16
+slowSquare(4); // "Calculating..." again → 16
+```
+
+It recalculates **every time**, even if the input is the same.
+
+---
+
+#### ⚡ Now Add Memoization
+
+```js
+function memoize(fn) {
+    const cache = {};
+
+    return function(...args) {
+        const key = JSON.stringify(args); // works for simple args
+        if (key in cache) {
+            console.log("Using cached result");
+            return cache[key];
+        }
+        console.log("Calculating...");
+        const result = fn(...args);
+        cache[key] = result;
+        return result;
+    };
+}
+
+// Create a memoized version of the slow function
+const fastSquare = memoize(slowSquare);
+
+fastSquare(4); // "Calculating..." → 16
+fastSquare(4); // "Using cached result" → 16
+```
+
+---
+
+#### 🔥 Real Example: Memoized Fibonacci
+
+```js
+function memoFib(n, cache = {}) {
+    if (n <= 1) return n;
+    if (cache[n]) return cache[n];
+
+    cache[n] = memoFib(n - 1, cache) + memoFib(n - 2, cache);
+    return cache[n];
+}
+
+memoFib(40); // FAST compared to normal recursion
+```
+
+🧠 Without memoization, `fib(40)` would do **millions** of calls. With memoization, it's blazing fast!
+
+---
+
+#### ⚠️ Watch Out:
+
+* Memoization only works well with **pure functions** (same input = same output).
+* Be careful with **object or array inputs** — use `Map()` or hash functions if needed.
+* In large apps, **cache invalidation** might be needed (like LRU).
+
+---
+
+#### 🧱 TL;DR
+
+```txt
+Memoization:
+  ✅ Cache return values of function calls
+  ✅ Speeds up repeated computations
+  ✅ Best for pure, heavy, recursive, or frequently-called functions
+
+Implementation:
+  - Use closure to store cache
+  - Key = input args (serialize with JSON.stringify)
+  - Check cache before calling original function
+```
+
+---
+
+## **Decorators (`@`)**
+
+> TL;DR: Decorators let you **wrap, modify, or enhance classes, methods, or properties** without touching their original code directly.
+
+They’re like stylish wrappers for your code. 💅
+Let’s break it down:
+
+---
+
+### 🧠 What Is a Decorator?
+
+A **decorator** is a special function used to **decorate** (modify/enhance) a class or its methods/properties.
+
+In JavaScript, decorators are still a **stage 3 proposal** (not standard yet), but they’re already supported via **TypeScript**, **Babel**, or **Next.js** with experimental flags.
+
+They look like this:
+
+```js
+@decorator
+class MyClass {}
+```
+
+Or on methods:
+
+```js
+class MyClass {
+  @log
+  greet() {
+    return "Hello";
+  }
+}
+```
+
+---
+
+### ⚙️ How Does It Work?
+
+A decorator is just a **function** that receives the thing it's decorating — the **class**, **method**, or **property** — and can change or extend its behavior.
+
+---
+
+### 🔹 Example 1: Class Decorator
+
+```js
+function sealed(constructor) {
+  Object.seal(constructor);
+  Object.seal(constructor.prototype);
+}
+
+@sealed
+class Hero {
+  constructor(name) {
+    this.name = name;
+  }
+}
+```
+
+> This prevents `Hero` from being modified (sealed class).
+
+---
+
+### 🔹 Example 2: Method Decorator
+
+```js
+function log(target, key, descriptor) {
+  const original = descriptor.value;
+
+  descriptor.value = function (...args) {
+    console.log(`Called ${key} with`, args);
+    return original.apply(this, args);
+  };
+
+  return descriptor;
+}
+
+class Calculator {
+  @log
+  add(a, b) {
+    return a + b;
+  }
+}
+
+const calc = new Calculator();
+calc.add(2, 3); // Logs: Called add with [2, 3]
+```
+
+---
+
+### 🔹 Example 3: Property Decorator
+
+```js
+function readonly(target, key, descriptor) {
+  descriptor.writable = false;
+  return descriptor;
+}
+
+class Person {
+  @readonly
+  name = "Aziz";
+}
+
+const p = new Person();
+p.name = "Yahyaoui"; // ❌ Error in strict mode or silently fails
+```
+
+---
+
+### 📦 Use Cases for Decorators
+
+| Use Case             | Decorator Does...                      |
+| -------------------- | -------------------------------------- |
+| Logging              | Wraps method to log calls              |
+| Authorization        | Checks user permissions before running |
+| Memoization          | Caches method result                   |
+| Validation           | Validates method input                 |
+| Debounce/Throttle    | Limits how often a method runs         |
+| Dependency Injection | Injects services in classes            |
+| Freezing/Sealing     | Makes class immutable                  |
+
+---
+
+### ⚠️ Notes:
+
+* Native decorators are not fully in the JS spec yet, but **TypeScript supports them well**.
+* You need Babel/TS or modern frameworks (like Angular, NestJS, Next.js with `experimentalDecorators`) to use them.
+
+---
+
+### 🧱 TL;DR for DeathNote
+
+```txt
+JavaScript Decorators (@):
+  ✅ Add extra behavior to classes, methods, or properties
+  ✅ Clean way to enhance without changing original logic
+  ✅ Use with TypeScript or Babel for now (not native JS)
+
+Syntax:
+  @decorator
+  class MyClass {}
+
+  @decorator
+  methodName() {}
+
+Use Cases:
+  - Logging, auth, caching, validation, metrics, DI, etc.
+```
+
+---
+
 ## **Testing**
 
 ### **JEST**
@@ -3980,7 +4240,28 @@ Will add it later
     )
 
 ---
+- Assignment and Equality Operators
+
+  - `=` (Assignment): Assigns a value to a variable.
+    ```js
+    let x = 10;
+    ```
+  - `==` (Loose Equality): Compares values after type coercion.
+    ```js
+    5 == "5"; // true
+    ```
+  - `===` (Strict Equality): Compares both value and type, no type conversion.
+    ```js
+    5 === "5"; // false
+    5 === 5;   // true
+    ```
+
+    **Best Practice:**  
+    Prefer `===` over `==` to avoid unexpected type coercion.
+
+---
 - forEach is BAD! for Async Await Code
+
 ---
 - STOP Using Switch Statements:
   - using Object
@@ -4026,10 +4307,11 @@ Will add it later
     console.log(yArray);
     console.log(xArray);
   ```
+
+---
+- composition vs inheritance:
+
+
 ---
 
 ## ToAdd
-
-  - Memoization "https://youtu.be/TWUV_LRVX24"
-
-  - Decorators "@"
