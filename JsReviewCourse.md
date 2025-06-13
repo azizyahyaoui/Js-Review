@@ -3003,6 +3003,77 @@ myDog.bark(); // Output: Rex is barking
 
 Prototypal inheritance is fundamental to JavaScript's object system, enabling flexible, dynamic, and memory-efficient code reuse.
 
+### **JavaScript Function Composition**
+
+Function composition is a functional programming technique where you combine simple functions to build more complex ones. It allows you to create flexible, reusable pipelines for data transformation.
+
+#### 🔧 Common Composition Patterns
+
+##### 1. **Manual Composition**
+
+Combine functions by nesting calls, passing the output of one as the input to the next.
+
+```js
+const greet = name => `Hello, ${name}!`;
+const exclaim = str => `${str}!!`;
+
+const excitedGreet = name => exclaim(greet(name));
+console.log(excitedGreet("Aziz")); // "Hello, Aziz!!"
+```
+
+##### 2. **Composing with Utility Functions**
+
+Create reusable `compose` and `pipe` helpers to chain functions together.
+
+```js
+// Compose: right-to-left (compose(f, g)(x) === f(g(x)))
+const compose = (...fns) =>
+  input => fns.reduceRight((acc, fn) => fn(acc), input);
+
+// Pipe: left-to-right (pipe(f, g)(x) === g(f(x)))
+const pipe = (...fns) =>
+  input => fns.reduce((acc, fn) => fn(acc), input);
+
+// Example usage
+const processName = pipe(
+  greet,           // "Hello, Ali!"
+  exclaim,         // "Hello, Ali!!"
+  str => str.toUpperCase() // "HELLO, ALI!!"
+);
+
+console.log(processName("Ali")); // "HELLO, ALI!!"
+```
+
+##### 3. **Object Composition (Alternative to Inheritance)**
+
+Instead of using classes and inheritance, you can compose objects by merging behaviors (mixins). This approach is more flexible and avoids deep inheritance hierarchies.
+
+```js
+const canGreet = state => ({
+  greet: () => `Hello, ${state.name}!`
+});
+
+const canExclaim = state => ({
+  exclaim: () => `${state.greet()}!!`
+});
+
+const createPerson = name => {
+  const state = { name };
+  return Object.assign({}, canGreet(state), canExclaim(state));
+};
+
+const person = createPerson("Aziz");
+console.log(person.greet());   // "Hello, Aziz!"
+console.log(person.exclaim()); // "Hello, Aziz!!"
+```
+
+---
+
+**Summary:**  
+- Function composition lets you build complex logic from small, reusable functions.
+- Use `compose` (right-to-left) or `pipe` (left-to-right) for readable pipelines.
+- Prefer object composition over inheritance for flexible, modular code.
+
 
 ### **Error handling: Try and Catch**
 
@@ -4226,7 +4297,8 @@ Will add it later
     - Object.freeze() creates a shallow freeze
     - Deep copies share no references
 
----
+  ---
+
 - Do not use innerHTML
     (slower xss) use doc fragments(faster)
     (
@@ -4239,7 +4311,8 @@ Will add it later
     ```
     )
 
----
+  ---
+
 - Assignment and Equality Operators
 
   - `=` (Assignment): Assigns a value to a variable.
@@ -4259,10 +4332,12 @@ Will add it later
     **Best Practice:**  
     Prefer `===` over `==` to avoid unexpected type coercion.
 
----
+  ---
+
 - forEach is BAD! for Async Await Code
 
----
+  ---
+
 - STOP Using Switch Statements:
   - using Object
     ```js
@@ -4290,7 +4365,8 @@ Will add it later
   -  How to check for an empty array in Javascript:
     [check here](https://youtu.be/ULniqxZ8ueI?list=PL0Zuz27SZ-6N3bG4YZhkrCL3ZmDcLTuGd)
 
----
+  ---
+
 - Mutable vs Immutable
   ```js
     // Primitives are immutable
@@ -4308,10 +4384,102 @@ Will add it later
     console.log(xArray);
   ```
 
----
-- composition vs inheritance:
+  ---
 
+- Composition vs inheritance:
 
----
+  ### 🧬 **Inheritance (IS-A relationship)**
+
+  Inheritance means you create a class based on another class:
+
+  ```js
+  class Animal {
+    speak() {
+      console.log("Animal speaks");
+    }
+  }
+
+  class Dog extends Animal {
+    bark() {
+      console.log("Woof!");
+    }
+  }
+
+  const dog = new Dog();
+  dog.speak(); // ✅ inherited
+  dog.bark();  // ✅ own method
+  ```
+
+  🔴 **Problems with Inheritance**:
+
+  * **Tight coupling**: Child is tightly bound to parent
+  * **Rigid structure**: Hard to change hierarchy later
+  * **Single Inheritance Limit**: JS classes only inherit from *one* parent
+  * **Fragile base class**: Changes to the parent might break the child
+  * **Leaky abstraction**: Child might expose unwanted parent behaviors
+
+  ---
+
+  ### ⚙️ **Composition (HAS-A relationship)**
+
+  Composition means you build behavior by combining smaller functions or objects.
+
+  ```js
+  const canEat = (state) => ({
+    eat: () => console.log(`${state.name} is eating`)
+  });
+
+  const canWalk = (state) => ({
+    walk: () => console.log(`${state.name} is walking`)
+  });
+
+  const canBark = (state) => ({
+    bark: () => console.log(`${state.name} is barking`)
+  });
+
+  const createDog = (name) => {
+    const state = { name };
+    return Object.assign({}, canEat(state), canWalk(state), canBark(state));
+  };
+
+  const dog = createDog("Charlie");
+  dog.eat();   // Charlie is eating
+  dog.walk();  // Charlie is walking
+  dog.bark();  // Charlie is barking
+  ```
+
+  ✅ **Benefits of Composition**:
+
+  * **Reusability**: Mix only the behaviors you need
+  * **Flexibility**: Add/remove capabilities easily
+  * **Decoupling**: No hierarchy to maintain
+  * **Testability**: Each piece is testable independently
+  * **Avoid deep inheritance trees**: No confusion, no "diamond problems"
+
+  ---
+
+  ### 📌 Why "Composition Over Inheritance"?
+
+  > Think **LEGO**: Build what you need from small, reusable blocks
+  > Not **Russian Dolls**: Where everything is nested and hard to untangle
+
+  **In Real Life:**
+
+  * React prefers composition (props, hooks, HOCs)
+  * Functional programming promotes it
+  * Libraries like Redux, RxJS, Ramda, Lodash FP — all lean into it
+
+  ---
+
+  ### ✨ When to use which?
+
+  | Situation                   | Go with...  |
+  | --------------------------- | ----------- |
+  | Needs natural hierarchy     | Inheritance |
+  | Dynamic, pluggable behavior | Composition |
+  | Game entities, React apps   | Composition |
+  | Classical OOP modeling      | Inheritance |
+
+  ---
 
 ## ToAdd
