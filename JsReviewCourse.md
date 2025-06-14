@@ -8,9 +8,10 @@
   - All related exercises and projects are organized in the same repository and divided into levels.
 
   > Docs:
-  - [freecodecamp async-await ](https://www.freecodecamp.org/news/javascript-async-await-tutorial-learn-callbacks-promises-async-await-by-making-icecream/)
-
-  - [jestjs.io/docs](https://jestjs.io/docs/api)
+  - [Javascript Documentation](https://www.javascripttutorial.net/)
+  - [Freecodecamp async-await ](https://www.freecodecamp.org/news/javascript-async-await-tutorial-learn-callbacks-promises-async-await-by-making-icecream/)
+  - [js-functional-concepts-pipe-and-compose](https://dev.to/joelbonetr/js-functional-concepts-pipe-and-compose-1mho)
+  - [Jestjs.io/docs](https://jestjs.io/docs/api)
 
   > Videos:
 
@@ -26,7 +27,7 @@
 
 > JavaScript (JS) is a high-level, interpreted programming language that conforms to the ECMAScript specification.
 
-## **Syntax**
+## **Syntax and basic Js**
 
 ### **Variables and Constant**
 
@@ -3986,7 +3987,6 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 
 ---
 
-
 ### **🔁 Memoization**
 
 #### 💭 What is Memoization?
@@ -4097,7 +4097,7 @@ Implementation:
 
 ---
 
-## **Decorators (`@`)**
+### **Decorators (`@`)**
 
 > TL;DR: Decorators let you **wrap, modify, or enhance classes, methods, or properties** without touching their original code directly.
 
@@ -4106,7 +4106,7 @@ Let’s break it down:
 
 ---
 
-### 🧠 What Is a Decorator?
+#### 🧠 What Is a Decorator?
 
 A **decorator** is a special function used to **decorate** (modify/enhance) a class or its methods/properties.
 
@@ -4132,13 +4132,13 @@ class MyClass {
 
 ---
 
-### ⚙️ How Does It Work?
+#### ⚙️ How Does It Work?
 
 A decorator is just a **function** that receives the thing it's decorating — the **class**, **method**, or **property** — and can change or extend its behavior.
 
 ---
 
-### 🔹 Example 1: Class Decorator
+#### 🔹 Example 1: Class Decorator
 
 ```js
 function sealed(constructor) {
@@ -4158,7 +4158,7 @@ class Hero {
 
 ---
 
-### 🔹 Example 2: Method Decorator
+#### 🔹 Example 2: Method Decorator
 
 ```js
 function log(target, key, descriptor) {
@@ -4185,7 +4185,7 @@ calc.add(2, 3); // Logs: Called add with [2, 3]
 
 ---
 
-### 🔹 Example 3: Property Decorator
+#### 🔹 Example 3: Property Decorator
 
 ```js
 function readonly(target, key, descriptor) {
@@ -4204,7 +4204,7 @@ p.name = "Yahyaoui"; // ❌ Error in strict mode or silently fails
 
 ---
 
-### 📦 Use Cases for Decorators
+#### 📦 Use Cases for Decorators
 
 | Use Case             | Decorator Does...                      |
 | -------------------- | -------------------------------------- |
@@ -4218,14 +4218,14 @@ p.name = "Yahyaoui"; // ❌ Error in strict mode or silently fails
 
 ---
 
-### ⚠️ Notes:
+#### ⚠️ Notes:
 
 * Native decorators are not fully in the JS spec yet, but **TypeScript supports them well**.
 * You need Babel/TS or modern frameworks (like Angular, NestJS, Next.js with `experimentalDecorators`) to use them.
 
 ---
 
-### 🧱 TL;DR for DeathNote
+#### 🧱 TL;DR for DeathNote
 
 ```txt
 JavaScript Decorators (@):
@@ -4246,6 +4246,284 @@ Use Cases:
 
 ---
 
+### **Pipe and Compose functions**
+
+> In JavaScript, piping and composing functions are powerful techniques for creating more readable, maintainable, and modular code. They are rooted in functional programming principles and allow you to chain together a series of functions, where the output of one function becomes the input of the next.
+
+#### Function Piping (or Flow)
+
+**Function piping**, also known as **flow**, is very similar to composition but applies functions from **left to right**. This often feels more natural and readable, as it mimics how data "flows" through a series of transformations.
+
+
+#### 🟦 `pipe()` — **Left to Right**
+
+> Imagine a sandwich being made step by step:
+
+```text
+Bread --> Add Cheese --> Add lettuce --> Toast --> Done
+```
+
+In code:
+
+```js
+pipe(addCheese, addLettuce, toast)(bread)
+```
+
+Under the hood:
+
+```js
+toast(addLettuce(addCheese(bread)))
+```
+
+**Visual Flow:**
+
+```text
+          ┌────────────┐
+input --> │ addCheese  │
+          └────────────┘
+               ↓
+          ┌────────────┐
+          │ addLettuce │
+          └────────────┘
+               ↓
+          ┌────────────┐
+          │   toast    │
+          └────────────┘
+               ↓
+             output
+```
+
+✅ **Readable like natural English:**
+
+> "Take the bread, then add cheese, then add lettuce, then toast it."
+
+---
+
+#### Implementing a `pipe` (or `flow`) Function
+
+A `pipe` function takes multiple functions as arguments and returns a new function that applies those functions from **left to right**.
+
+```javascript
+const pipe = (...fns) => (initialValue) =>
+  fns.reduce((acc, fn) => fn(acc), initialValue);
+
+// Example Usage:
+const add5 = (num) => {
+  console.log(`add5(${num}) -> ${num + 5}`);
+  return num + 5;
+};
+const multiplyBy2 = (num) => {
+  console.log(`multiplyBy2(${num}) -> ${num * 2}`);
+  return num * 2;
+};
+const subtract10 = (num) => {
+  console.log(`subtract10(${num}) -> ${num - 10}`);
+  return num - 10;
+};
+
+const pipedFunction = pipe(add5, multiplyBy2, subtract10);
+
+const result = pipedFunction(10);
+console.log('Result:', result);
+
+/*
+Output:
+add5(10) -> 15
+multiplyBy2(15) -> 30
+subtract10(30) -> 20
+Result: 20
+*/
+```
+
+**How `pipe` works:**
+
+The implementation is almost identical to `compose`, but it uses `reduce` instead of `reduceRight`.
+
+1.  **`fns.reduce((acc, fn) => fn(acc), initialValue)`**:
+    * `reduce` iterates over the `fns` array from left to right.
+    * `acc` (accumulator) starts with `initialValue`.
+    * In each iteration, `fn(acc)` is called, applying the current function `fn` to the accumulated value `acc`.
+    * The result of `fn(acc)` becomes the new `acc` for the next iteration.
+
+#### Function Composition
+
+**Function composition** is the act of combining simple functions to build more complex ones. Mathematically, if you have two functions f(x) and g(x), their composition would be h(x) = f(g(x)). In this case, g(x) is executed first, and its result is then passed to f(x).
+
+#### 🟨 `compose()` — **Right to Left**
+
+Same sandwich example, but describing how you’d **build it in reverse** (mathematically elegant):
+
+```js
+compose(toast, addLettuce, addCheese)(bread)
+```
+
+This is the same as:
+
+```js
+toast(addLettuce(addCheese(bread)))
+```
+
+**Visual Flow:**
+
+```text
+            ┌────────────┐
+input <---- │ addCheese  │
+            └────────────┘
+                   ↑
+            ┌────────────┐
+            │ addLettuce │
+            └────────────┘
+                   ↑
+            ┌────────────┐
+            │   toast    │
+            └────────────┘
+                   ↑
+                output
+```
+
+✅ **More math-y, more control:**
+
+> "Compose a final function that **first toasts**, then **adds Lettuce**, then **adds cheese** to any bread you give it."
+
+---
+
+#### Basic Example of Manual Composition
+
+```javascript
+const add5 = (num) => num + 5;
+const multiplyBy2 = (num) => num * 2;
+const subtract10 = (num) => num - 10;
+
+// Manually composing them
+const result = subtract10(multiplyBy2(add5(10))); // (10 + 5) * 2 - 10 = 15 * 2 - 10 = 30 - 10 = 20
+console.log(result); // 20
+```
+
+While this works, it can become difficult to read and manage as the number of functions increases, leading to "callback hell" or deeply nested calls.
+
+#### Implementing a `compose` Function
+
+A `compose` function takes multiple functions as arguments and returns a new function that applies those functions from **right to left**.
+
+```javascript
+const compose = (...fns) => (initialValue) =>
+  fns.reduceRight((acc, fn) => fn(acc), initialValue);
+
+// Example Usage:
+const add5 = (num) => {
+  console.log(`add5(${num}) -> ${num + 5}`);
+  return num + 5;
+};
+const multiplyBy2 = (num) => {
+  console.log(`multiplyBy2(${num}) -> ${num * 2}`);
+  return num * 2;
+};
+const subtract10 = (num) => {
+  console.log(`subtract10(${num}) -> ${num - 10}`);
+  return num - 10;
+};
+
+const composedFunction = compose(subtract10, multiplyBy2, add5);
+
+const result = composedFunction(10);
+console.log('Result:', result);
+
+/*
+Output:
+add5(10) -> 15
+multiplyBy2(15) -> 30
+subtract10(30) -> 20
+Result: 20
+*/
+```
+
+**How `compose` works:**
+
+1.  **`...fns`**: Uses the rest parameter syntax to collect all passed functions into an array `fns`.
+2.  **`(initialValue) => ...`**: Returns a new function that takes an `initialValue`. This is the value that will be passed through the composed functions.
+3.  **`fns.reduceRight((acc, fn) => fn(acc), initialValue)`**:
+    * `reduceRight` iterates over the `fns` array from right to left.
+    * `acc` (accumulator) starts with `initialValue`.
+    * In each iteration, `fn(acc)` is called, meaning the current function `fn` is applied to the accumulated value `acc`.
+    * The result of `fn(acc)` becomes the new `acc` for the next iteration.
+
+#### Why Use Pipe and Compose?
+
+1.  **Readability:** They make complex sequences of operations easier to read and understand, as you can see the data transformation flow (especially with `pipe`).
+2.  **Modularity:** You break down large problems into smaller, single-purpose functions. Each function does one thing well.
+3.  **Reusability:** The small, pure functions used in composition/piping are highly reusable across different parts of your application.
+4.  **Maintainability:** Changes to one part of the data transformation pipeline are isolated to the specific function, reducing side effects.
+5.  **Testability:** Small, pure functions are easy to test in isolation.
+6.  **Declarative Style:** Instead of imperative step-by-step instructions, you declare *what* transformations should occur.
+
+#### Real-World Use Cases
+
+Imagine you're processing a list of users:
+
+```javascript
+const users = [
+  { name: 'alice', age: 30, isActive: true },
+  { name: 'bob', age: 25, isActive: false },
+  { name: 'charlie', age: 35, isActive: true },
+  { name: 'david', age: 20, isActive: true },
+];
+
+const filterActiveUsers = (usersArray) =>
+  usersArray.filter((user) => user.isActive);
+
+const mapToNames = (usersArray) =>
+  usersArray.map((user) => user.name);
+
+const toUpperCase = (namesArray) =>
+  namesArray.map((name) => name.toUpperCase());
+
+const sortAlphabetically = (namesArray) =>
+  [...namesArray].sort(); // Create a shallow copy to avoid mutating original
+
+// Using pipe to process users
+const processUserNames = pipe(
+  filterActiveUsers,
+  mapToNames,
+  toUpperCase,
+  sortAlphabetically
+);
+
+const processedNames = processUserNames(users);
+console.log(processedNames); // [ 'ALICE', 'CHARLIE', 'DAVID' ]
+```
+
+This example clearly demonstrates the flow of data: `users` are first filtered, then mapped to names, then converted to uppercase, and finally sorted.
+
+#### Libraries for Pipe/Compose
+
+Many functional programming libraries provide `compose` and `pipe` utilities out of the box, often with more advanced features like currying.
+
+* **Lodash:** `_.flow()` (pipe) and `_.flowRight()` (compose)
+* **Ramda:** `R.pipe()` and `R.compose()`
+
+These libraries often offer optimized and more robust implementations, especially when dealing with functions that take multiple arguments (which typically requires currying for seamless piping/composition).
+
+#### 🔁 Summary
+
+| Concept        | `pipe(f1, f2, f3)(x)`    | `compose(f3, f2, f1)(x)` |
+| -------------- | ------------------------ | ------------------------ |
+| Order          | Left → Right             | Right → Left             |
+| Visual         | Step 1 → Step 2 → Step 3 | Step 3 → Step 2 → Step 1 |
+| Readability    | Easy, natural            | More mathematical        |
+| Under the Hood | `f3(f2(f1(x)))`          | `f3(f2(f1(x)))`          |
+
+---
+
+#### Conclusion
+
+Function composition and piping are fundamental patterns in functional JavaScript. By embracing them, you can write cleaner, more maintainable, and easier-to-reason-about code that transforms data in a clear, sequential manner. While manual implementation is straightforward for basic cases, considering a utility library can provide more advanced capabilities for complex scenarios.
+
+---
+
+## **Fetching API data**
+
+---
+
 ## **Testing**
 
 ### **JEST**
@@ -4260,10 +4538,6 @@ Use Cases:
 
 ---
 
-## **- Projects and Ending**
-Will add it later
-
----
 
 ## Notes and Best Practices:
 
@@ -4481,5 +4755,10 @@ Will add it later
   | Classical OOP modeling      | Inheritance |
 
   ---
+
+## **- Projects and Ending**
+Will add it later
+
+---
 
 ## ToAdd
