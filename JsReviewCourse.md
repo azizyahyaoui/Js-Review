@@ -3985,7 +3985,193 @@ IIFEs are useful for encapsulating logic and maintaining private state in JavaSc
 
 ### **Modules (import / export)**
 
+> Modules allow you to split your code into separate files, each with its own scope. This makes code easier to organize, maintain, and reuse. Modules are a standard feature in modern JavaScript (ES6+), supported natively in browsers and Node.js (with some differences).
+
+#### **Why Use Modules?**
+
+- **Encapsulation:** Variables, functions, and classes defined in a module are not visible outside unless explicitly exported.
+- **Reusability:** Share code between files and projects.
+- **Maintainability:** Keep code organized and manageable.
+- **Avoid Global Scope Pollution:** Each module has its own scope.
+
 ---
+
+#### **Exporting from a Module**
+
+You can export variables, functions, or classes from a module so they can be used in other files.
+
+##### **Named Exports**
+
+Export multiple items by name:
+
+```js
+// mathUtils.js
+export const PI = 3.14159;
+export function add(a, b) {
+  return a + b;
+}
+export class Calculator {
+  multiply(a, b) {
+    return a * b;
+  }
+}
+```
+
+You can also export after declaration:
+
+```js
+function subtract(a, b) {
+  return a - b;
+}
+export { subtract };
+```
+
+##### **Default Export**
+
+Each module can have one default export:
+
+```js
+// logger.js
+export default function log(message) {
+  console.log(`[LOG]: ${message}`);
+}
+```
+
+Or with classes/objects:
+
+```js
+export default class Logger { /* ... */ }
+```
+
+---
+
+#### **Importing in Another Module**
+
+##### **Import Named Exports**
+
+```js
+// main.js
+import { PI, add, Calculator } from './mathUtils.js';
+
+console.log(PI); // 3.14159
+console.log(add(2, 3)); // 5
+const calc = new Calculator();
+console.log(calc.multiply(2, 4)); // 8
+```
+
+You can rename imports:
+
+```js
+import { add as sum } from './mathUtils.js';
+console.log(sum(1, 2)); // 3
+```
+
+##### **Import Default Export**
+
+```js
+import log from './logger.js';
+log('Hello!'); // [LOG]: Hello!
+```
+
+##### **Import All Exports as an Object**
+
+```js
+import * as math from './mathUtils.js';
+console.log(math.PI);
+console.log(math.add(1, 2));
+```
+
+---
+
+#### **Mixing Default and Named Exports**
+
+```js
+// utils.js
+export default function greet(name) {
+  return `Hello, ${name}!`;
+}
+export const version = '1.0.0';
+
+// main.js
+import greet, { version } from './utils.js';
+console.log(greet('Aziz')); // Hello, Aziz!
+console.log(version); // 1.0.0
+```
+
+---
+
+#### **Module Syntax Rules**
+
+- **File Extension:** Use `.js` or `.mjs` (Node.js) for modules.
+- **Top-Level Only:** `import` and `export` must be at the top level, not inside functions or blocks.
+- **Strict Mode:** Modules are always in strict mode.
+- **Single Scope:** Each module has its own scope.
+
+---
+
+#### **Dynamic Imports**
+
+You can load modules dynamically using `import()` (returns a Promise):
+
+```js
+// main.js
+button.addEventListener('click', async () => {
+  const { add } = await import('./mathUtils.js');
+  console.log(add(5, 7));
+});
+```
+
+---
+
+#### **How Modules Work in Browsers**
+
+- Use `<script type="module" src="main.js"></script>` in HTML.
+- Module scripts are deferred by default.
+- Module imports are relative to the importing file.
+
+```html
+<script type="module" src="main.js"></script>
+```
+
+---
+
+#### **How Modules Work in Node.js**
+
+- Use `.mjs` extension or set `"type": "module"` in `package.json`.
+- Use full file paths (including `.js`).
+- `import`/`export` are not available in CommonJS (`require`/`module.exports`).
+
+---
+
+#### **Common Patterns**
+
+- **Barrel Files:** Create an `index.js` that re-exports from multiple modules for easier imports.
+- **Tree Shaking:** Modern bundlers remove unused exports for smaller bundles.
+
+---
+
+#### **Summary Table**
+
+| Feature         | Named Export         | Default Export         | Import All         | Dynamic Import      |
+|-----------------|---------------------|-----------------------|--------------------|---------------------|
+| Syntax          | `export { foo }`    | `export default foo`  | `import * as x`   | `import('./mod.js')`|
+| Import Syntax   | `import { foo }`    | `import foo`          | `import * as x`   | `await import()`    |
+| Multiple/Module | Yes                 | Only one              | Yes               | Yes                 |
+
+---
+
+#### **Best Practices**
+
+- Prefer named exports for clarity and easier refactoring.
+- Use default export for the main value of a module.
+- Keep modules focused and small.
+- Avoid circular dependencies.
+
+---
+
+**In summary:**  
+Modules are the foundation of modern JavaScript applications. They help you organize, encapsulate, and reuse code efficiently using `export` and `import` statements.
+
 
 ### **🔁 Memoization**
 
@@ -4521,6 +4707,133 @@ Function composition and piping are fundamental patterns in functional JavaScrip
 ---
 
 ## **Fetching API data**
+
+---
+
+## **Strict Mode("use strict";)**
+
+> Strict mode was introduced in **ECMAScript 5 (ES5)** as a way to make JavaScript more reliable and secure by catching common coding errors early. By enabling strict mode, developers avoid problematic practices that could lead to unexpected behaviors.
+
+---
+
+### **How to Enable Strict Mode**  
+Strict mode can be applied in two ways:  
+
+#### **1. At the script level**  
+Simply add `"use strict";` at the beginning of a JavaScript file. This will apply strict mode to the entire script.  
+```javascript
+"use strict";  
+console.log("Strict mode enabled!");  
+```
+All subsequent code in this file will follow strict mode rules.  
+
+#### **2. At the function level**  
+You can enable strict mode only inside a function:  
+```javascript
+function myFunction() {
+  "use strict";
+  let test = "This function runs in strict mode!";
+}
+```
+This ensures that strict mode is applied only within this function, leaving the rest of the script unaffected.
+
+---
+
+### **Key Features and Restrictions of Strict Mode**  
+
+✅ **Eliminates accidental global variables**  
+```javascript
+"use strict";
+myVar = 5;  // ❌ Error: myVar is not defined
+```
+Without strict mode, JavaScript would automatically declare `myVar` as a global variable. Strict mode prevents this.
+
+✅ **Restricts the use of `this` in functions**  
+In **non-strict mode**, calling a function without context assigns `this` to the global object (`window` in browsers).  
+```javascript
+function testFunction() {
+  console.log(this);  // In non-strict mode: `this` refers to the global object
+}
+testFunction();
+```
+In **strict mode**, `this` will be `undefined`.  
+```javascript
+"use strict";
+function testFunction() {
+  console.log(this);  // ✅ `this` is undefined in strict mode
+}
+testFunction();
+```
+
+✅ **Prevents assignment to read-only properties**  
+```javascript
+"use strict";
+const obj = Object.freeze({ name: "Aziz" });
+obj.name = "Copilot";  // ❌ Error: Cannot modify a read-only property
+```
+Strict mode protects objects from unintended modifications.
+
+✅ **Disallows duplicate parameter names**  
+```javascript
+function example(a, a) {  
+  return a;  
+}
+```
+🚨 **Error in strict mode!** Duplicate parameters are not allowed.
+
+✅ **Throws errors for octal numeric literals**  
+In **non-strict mode**, octal literals (`075`) are valid numbers.  
+```javascript
+let num = 075;  // Allowed in non-strict mode
+```
+🚨 **Error in strict mode!** Octal literals are forbidden. Use `0o75` instead.
+
+✅ **Prevents the deletion of non-deletable properties**  
+```javascript
+"use strict";
+delete Object.prototype; // ❌ Error: Cannot delete non-configurable properties
+```
+
+✅ **Forbids `with` statements**  
+The `with` statement is banned in strict mode since it can create **ambiguity in variable scope**, making debugging harder.  
+```javascript
+"use strict";
+with (document) {  
+  console.log(title);  // ❌ Error: `with` is not allowed in strict mode
+}
+```
+
+---
+
+### **Strict Mode and Modern JavaScript (ES6+)**  
+Strict mode laid the foundation for **ES6 (ECMAScript 2015)**, which introduced new features like `let`, `const`, and **arrow functions** that naturally enforce stricter rules.  
+For example:  
+```javascript
+let myVar = "Hello";  
+const myConst = "Strict mode makes JavaScript better!";
+```
+Using `let` and `const` avoids common pitfalls that strict mode catches.
+
+---
+
+### **Should You Always Use Strict Mode?**  
+YES! Strict mode ensures:
+- **Fewer hidden bugs**
+- **Better security**
+- **More maintainable code**
+- **Future-proof JavaScript practices**
+
+Modern JavaScript practices **implicitly follow strict mode**, especially when using **ES6 modules**:  
+```javascript
+export function myModule() {
+  console.log("Modules are strict by default!");
+}
+```
+
+---
+
+### **Conclusion**  
+Strict mode is a **developer's best friend**. It enforces clean, safe coding practices, prevents common mistakes, and helps JavaScript run more efficiently. If you're serious about mastering JavaScript, **use strict mode by default!** 🚀
 
 ---
 
