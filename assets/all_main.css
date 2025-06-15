@@ -1,0 +1,159 @@
+/* CSS for the main page of the website */
+:root {
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Nunito", sans-serif;
+  --nav-font: "Inter", sans-serif;
+
+  --background-color: #ffffff;
+  --default-color: #3d4348;
+  --heading-color: #3e5055;
+  --accent-color: #f89932;
+  --surface-color: #ffffff;
+  --contrast-color: #ffffff;
+  --blue-color: blue;
+  --nav-color: #090909;
+  --nav-hover-color: #8abd38;
+  --nav-mobile-background-color: #f5efef;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #313336;
+  --nav-dropdown-hover-color: #eb5c62;
+  scroll-behavior: smooth;
+
+}
+
+.light-background {
+  --background-color: #f8fbfc;
+  --surface-color: #ffffff;
+}
+
+.dark-background {
+  --background-color: #060606;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
+}
+
+body {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-family: var(--default-font);
+}
+/* Dark Mode Start */
+.dark-mode {
+  --background-color: #060606;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
+}
+
+
+
+/* Your floating button styles */
+.theme-toggle {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.theme-toggle-btn {
+  background-color: var(--surface-color);
+  color: var(--default-color);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn:hover {
+  background-color: color-mix(in srgb, var(--surface-color), transparent 15%);
+}
+
+.dark-mode .theme-toggle-btn {
+  background-color: var(--contrast-color);
+  color: var(--default-color);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .main-btn {
+    font-size: medium !important;
+    text-wrap: nowrap;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1025px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+button {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+button:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+  color: var(--contrast-color);
+}
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+button:active {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  color: var(--contrast-color);
+}

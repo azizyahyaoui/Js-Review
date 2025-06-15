@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../../assets/all_main.css" />
   <title>Rock Paper Scissor V2</title>
 </head>
 
-  <div>
-    <h2>Welcome to Rock Paper Scissors version 2</h2>
+<body>
+  <div class="container">
+    <div>
+      <h2>Welcome to Rock Paper Scissors version 2</h2>
+    </div>
+    <div>
+      <button type="button" onclick="playGame('rock')">Rock</button>
+      <button type="button" onclick="playGame('paper');">Paper</button>
+      <button type="button" onclick="playGame('scissors');">Scissors</button>
+    </div>
+    <br>
+    <div>
+      <button type="button" onclick="resetScore()">Rest Game</button>
+    </div>
+    <script src="Js/08-V2-Rock-Paper-Scissor.js"></script>
   </div>
-  <div>
-    <button type="button" onclick="playGame('rock')">Rock</button>
-    <button type="button" onclick="playGame('paper');">Paper</button>
-    <button type="button" onclick="playGame('scissors');">Scissors</button>
-  </div>
-<br>
-  <div>
-    <button type="button" onclick="resetScore()">Rest Game</button>
-  </div>
-  <script src="Js/08-V2-Rock-Paper-Scissor.js"></script>
 </body>
+
 </html>
